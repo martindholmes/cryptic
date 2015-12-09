@@ -1,0 +1,30 @@
+/* Styles for form-based generation of crossword TEI file. */
+
+body{
+  margin: 1em 10%;
+}
+
+h1, h2, div{
+  text-align: center;
+}
+
+div#grid{
+  margin-top: 2em;
+}
+
+table.grid{
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+  padding: 0;
+  border: solid 1px black;
+}
+
+table.grid td{
+  width: 1.5em;
+  height: 1.5em;
+  padding: 0;
+  border: solid 1px black;
+  cursor: pointer;
+  background-color: #ffffff;
+}
