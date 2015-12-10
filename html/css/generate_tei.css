@@ -8,6 +8,10 @@ h1, h2, div{
   text-align: center;
 }
 
+#btnFillClues{
+  visibility: hidden;
+}
+
 div#grid{
   margin-top: 2em;
 }
@@ -21,10 +25,18 @@ table.grid{
 }
 
 table.grid td{
-  width: 1.5em;
-  height: 1.5em;
+  width: 2em;
+  height: 2em;
   padding: 0;
   border: solid 1px black;
   cursor: pointer;
   background-color: #ffffff;
+}
+
+span.clueNum{
+  vertical-align: super;
+  font-size: 70%;
+  position: relative;
+  top: -0.5em;
+  left: -0.8em;
 }

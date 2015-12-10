@@ -18,11 +18,11 @@
         <div id="controls">
             
             <label for="gridSize">Grid size:</label> <input id="gridSize" type="text" onchange="validateInteger(this)" size="2" onkeyup="validateInteger(this)" pattern="[0-9]{1,2}" 
-                value="16" title="An integer between 8 and 32."></input>
+                value="15" title="An integer between 8 and 32."></input>
             <button onclick="generateGrid(); return false;">Generate grid</button><br/>
             <input id="symmetricalGrid" type="checkbox" checked="checked"/>
-            <label for="symmetricalGrid">Symmetrical grid</label>
-            
+            <label for="symmetricalGrid">Symmetrical grid</label><br/>
+            <button id="btnFillClues" onclick="fillClues(); return false;">Fill clues</button><br/>
         </div>
         </form>
         <div id="grid">
