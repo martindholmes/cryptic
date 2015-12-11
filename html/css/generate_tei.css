@@ -12,6 +12,33 @@ h1, h2, div{
   visibility: hidden;
 }
 
+div#clues{
+  float: left;
+  margin: 2em 1%;
+  visibility: hidden;
+  width: 39%;
+}
+
+div#across, div#down{
+  text-align: left;
+}
+
+span.clue{
+  margin-right: 0.5em;
+}
+
+span.len:before{
+  content: "("
+}
+
+span.len:after{
+  content: ")"
+}
+
+span.ans{
+  text-transform: uppercase;
+}
+
 div#grid{
   margin-top: 2em;
 }

@@ -57,6 +57,7 @@ function generateGrid(){
   gridDiv.appendChild(table);
   grid = table;
   document.getElementById('btnFillClues').style.visibility = 'visible';
+  document.getElementById('clues').style.visibility = 'visible';
 }
 
 //Switch the sender cell (and possibly its matching cells) between black and white.
@@ -107,11 +108,20 @@ function isStartOfVerticalClue(rowNum, colNum, row, cell){
   }
 }
 
+/* This function parses the grid to determine where words start, and 
+   creates a blank clue for each word it finds. */
 function fillClues(){
   if (grid != null){
     var clueNum = 0;
     tbody = grid.getElementsByTagName('tbody')[0];
     var rows = tbody.getElementsByTagName('tr');
+    if (clearClues() == false){
+      return false;
+    }
+    var acrossList = document.createElement('ol');
+    document.getElementById('across').appendChild(acrossList);
+    var downList = document.createElement('ol');
+    document.getElementById('down').appendChild(downList);
     for (var rowNum = 0; rowNum<rows.length; rowNum++){
       var cells = rows[rowNum].getElementsByTagName('td');
       for (var colNum = 0; colNum<cells.length; colNum++){
@@ -119,7 +129,9 @@ function fillClues(){
           cells[colNum].removeChild(cells[colNum].firstChild);
         }
         cells[colNum].setAttribute('title', '');
-        if ((isStartOfHorizontalClue(rowNum, colNum, rows[rowNum], cells[colNum])) || (isStartOfVerticalClue(rowNum, colNum, rows[rowNum], cells[colNum]))){
+        var isHor = isStartOfHorizontalClue(rowNum, colNum, rows[rowNum], cells[colNum]);
+        var isVer = isStartOfVerticalClue(rowNum, colNum, rows[rowNum], cells[colNum]);
+        if (isHor || isVer){
           clueNum++;
           cells[colNum].setAttribute('title', clueNum);
           var n = document.createElement('span');
@@ -127,9 +139,55 @@ function fillClues(){
           var t = document.createTextNode(clueNum);
           n.appendChild(t);
           cells[colNum].appendChild(n);
+          if (isHor){
+//TODO: Calculate answer length.
+            createClue(acrossList, clueNum, 6);
+          }
+          if (isVer){
+//TODO: Calculate answer length.
+            createClue(downList, clueNum, 6);
+          }
         }
       }
     }
   }
   return false;
 }
+
+function clearClues(){
+  var clues = document.getElementById('clues').getElementsByTagName('ol');
+  if ((clues.length < 1)||(confirm('Are you sure you want to delete existing clues?'))){
+    for (var i=clues.length-1; i>=0; i--){
+      clues[i].parentNode.removeChild(clues[i]);
+    }
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+function createClue(list, num, length){
+  var item = document.createElement('li');
+  item.setAttribute('value', num);
+  var clue = document.createElement('span');
+  clue.setAttribute('class', 'clue');
+  clue.setAttribute('contenteditable', 'true');
+  var t = document.createTextNode('clue');
+  clue.appendChild(t);
+  item.appendChild(clue);
+  var len = document.createElement('span');
+  len.setAttribute('class', 'len');
+  len.setAttribute('contenteditable', 'true');
+  var n = document.createTextNode(length);
+  len.appendChild(n);
+  item.appendChild(len);
+  var ans = document.createElement('span');
+  ans.setAttribute('class', 'answer');
+  ans.setAttribute('contenteditable', 'true');
+  ans.appendChild(document.createTextNode('ANSWER'));
+  item.appendChild(document.createElement('br'));
+  item.appendChild(ans);
+  list.appendChild(item);
+}
+
