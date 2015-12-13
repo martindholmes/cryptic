@@ -10,6 +10,8 @@ var black = 'rgb(0, 0, 0)';
 var white = 'rgb(255, 255, 255)';
 var blackRegExp = /^rgb\(\s*0,\s*0,\s*0\s*\)$/i;
 var whiteRegExp = /^rgb\(\s*255,\s*255,\s*255\s*\)$/i;
+var lenRegExp = /^[0-9]+(,[0-9]+)*$/;
+var lenNotCorrect = 'The stated length of this answer is not correct; it should be ';
 
 function validateInteger(sender){
     if ((sender.value.match('^[0-9]{1,2}')) && (parseInt(sender.value) >= minGridSize) && (parseInt(sender.value) <= maxGridSize)){
@@ -44,6 +46,7 @@ function generateGrid(){
       var td = document.createElement('td');
       td.setAttribute('title', 'cellTitle');
       td.setAttribute('onclick', 'switchBlack(this)');
+      td.style.backgroundColor = white;
       var text = document.createTextNode('\u00a0');
       td.appendChild(text);
       tr.appendChild(td);
@@ -79,33 +82,34 @@ function switchBlack(sender){
   }
 }
 
-//Utility functions for navigating the grid.
-function isStartOfHorizontalClue(rowNum, colNum, row, cell){
-  if ((blackRegExp.test(cell.style.backgroundColor)) || !(cell.nextSibling) || (blackRegExp.test(cell.nextSibling.style.backgroundColor))){
-    return false;
+//Two utility functions for navigating the grid.
+//These functions return the number of lights (white cells) starting
+//from the current clue; in other words the length of the possible 
+//answer; a value of 1 or less means that this is not the start of 
+//a clue.
+function numHorizontalLights(rowNum, colNum, row, cell){
+  if (blackRegExp.test(cell.style.backgroundColor) || (cell.previousSibling && whiteRegExp.test(cell.previousSibling.style.backgroundColor))){
+    return 0;
   }
-  else{
-    if ((colNum == 0)||(blackRegExp.test(cell.previousSibling.style.backgroundColor))){
-      return true;
-    }
-    else{
-      return false;
-    }
+  var lights = 1;
+  while (cell.nextSibling && whiteRegExp.test(cell.nextSibling.style.backgroundColor)){
+    lights += 1;
+    cell = cell.nextSibling;
   }
+  return lights;
 }
 
-function isStartOfVerticalClue(rowNum, colNum, row, cell){
-  if ((blackRegExp.test(cell.style.backgroundColor))||!(row.nextSibling) || (blackRegExp.test(row.nextSibling.childNodes[colNum].style.backgroundColor))){
-    return false;
+function numVerticalLights(rowNum, colNum, row, cell){
+  if (blackRegExp.test(cell.style.backgroundColor) || (row.previousSibling && whiteRegExp.test(row.previousSibling.childNodes[colNum].style.backgroundColor))){
+    return 0;
   }
-  else{
-    if ((rowNum == 0)||(blackRegExp.test(row.previousSibling.childNodes[colNum].style.backgroundColor))){
-      return true;
-    }
-    else{
-      return false;
-    }
+  var lights = 1;
+  while (row.nextSibling && whiteRegExp.test(row.nextSibling.childNodes[colNum].style.backgroundColor)){
+    lights += 1;
+    row = row.nextSibling;
+    cell = row.childNodes[colNum];
   }
+  return lights;
 }
 
 /* This function parses the grid to determine where words start, and 
@@ -129,9 +133,9 @@ function fillClues(){
           cells[colNum].removeChild(cells[colNum].firstChild);
         }
         cells[colNum].setAttribute('title', '');
-        var isHor = isStartOfHorizontalClue(rowNum, colNum, rows[rowNum], cells[colNum]);
-        var isVer = isStartOfVerticalClue(rowNum, colNum, rows[rowNum], cells[colNum]);
-        if (isHor || isVer){
+        var horLights = numHorizontalLights(rowNum, colNum, rows[rowNum], cells[colNum]);
+        var verLights = numVerticalLights(rowNum, colNum, rows[rowNum], cells[colNum]);
+        if (horLights > 1 || verLights > 1){
           clueNum++;
           cells[colNum].setAttribute('title', clueNum);
           var n = document.createElement('span');
@@ -139,13 +143,11 @@ function fillClues(){
           var t = document.createTextNode(clueNum);
           n.appendChild(t);
           cells[colNum].appendChild(n);
-          if (isHor){
-//TODO: Calculate answer length.
-            createClue(acrossList, clueNum, 6);
+          if (horLights > 1){
+            createClue(acrossList, clueNum, horLights);
           }
-          if (isVer){
-//TODO: Calculate answer length.
-            createClue(downList, clueNum, 6);
+          if (verLights > 1){
+            createClue(downList, clueNum, verLights);
           }
         }
       }
@@ -179,6 +181,7 @@ function createClue(list, num, length){
   var len = document.createElement('span');
   len.setAttribute('class', 'len');
   len.setAttribute('contenteditable', 'true');
+  len.setAttribute('onkeyup', 'checkClueLength(this, ' + length + ')');
   var n = document.createTextNode(length);
   len.appendChild(n);
   item.appendChild(len);
@@ -189,5 +192,25 @@ function createClue(list, num, length){
   item.appendChild(document.createElement('br'));
   item.appendChild(ans);
   list.appendChild(item);
+}
+
+function checkClueLength(sender, length){
+  var len = sender.textContent;
+  var lenClean = len.replace('\s+', '');
+  if (lenClean != len){
+    len = lenClean;
+    sender.textContent = len;
+  }
+  var lens = len.split(',');
+  var newLen = 0;
+  for (var i=0; i<lens.length; i++){newLen += parseInt(lens[i]);}
+  if ((!(lenRegExp.test(len))) || (newLen != length)){
+    sender.style.backgroundColor = '#ffc0c0';
+    sender.setAttribute('title', lenNotCorrect + length + '.');
+  }
+  else{
+    sender.style.backgroundColor = white;
+    sender.setAttribute('title', '');
+  }
 }
 
