@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="all" name="buildSchema">
+  
+<!-- This is a simple ant task for building the RelaxNG schema
+     from the project ODD file. It's a two-stage process; the 
+     ODD file must be pre-processed to expand some content 
+     defined in the header to create additional constraints
+     in the schemaSpec.
+     
+     Note that this build process depends on the presence of 
+     Saxon HE and Jing. These are located in this relative 
+     location:
+     
+     ../../utilities
+     
+     so you will need to pass this to ant:
+     
+     -lib ../../utilities
+  -->
+  
+  <taskdef name="jing" classname="com.thaiopensource.relaxng.util.JingTask" />
+  
+  <property name="echo.separator" value="************************************************"/>
+  
+  <target name="expandODD">
+    <echo message="${echo.separator}"/>
+    <echo message="Expanding the ODD file..."/>
+    <xslt in="cryptic.odd" out="temp.odd"
+      style="pre-process_odd.xsl">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <echo message="Done!"/>
+    <echo message="${echo.separator}"/>
+  </target>
+  
+  <target name="createSchema">
+    <echo message="${echo.separator}"/>
+    <echo message="Generating the schema by calling out to OxGarage..."/>
+    <!--   curl -s -F upload=@temp.odd  -o cryptic.rng http://oxgarage.oucs.ox.ac.uk:8080/ege-webservice/Conversions/ODD%3Atext%3Axml/ODDC%3Atext%3Axml/relaxng%3Aapplication%3Axml-relaxng/ -->
+    <exec executable="curl">
+      <!--<arg value="-c"/>
+      <arg value="curl"/>-->
+      <arg value="-s"/>
+      <arg value="-F"/>
+      <arg value="upload=@temp.odd"/>
+      <arg line="-o cryptic.rng"/>
+      <arg line="http://oxgarage.oucs.ox.ac.uk:8080/ege-webservice/Conversions/ODD%3Atext%3Axml/ODDC%3Atext%3Axml/relaxng%3Aapplication%3Axml-relaxng/"/>
+    </exec>
+    <echo message="Done!"/>
+    <echo message="${echo.separator}"/>
+  </target>
+  
+  <target name="validateSchema">
+    <echo message="${echo.separator}"/>
+    <echo message="Validating the schema..."/>
+    <jing rngfile="relaxng.rng">
+      <fileset dir="." includes="cryptic.rng"/>
+    </jing>
+    <echo message="Done!"/>
+    <echo message="${echo.separator}"/>
+  </target>
+  
+  <target name="cleanUp">
+    <echo message="${echo.separator}"/>
+    <echo message="Cleaning up..."/>
+    <delete file="temp.odd"/> 
+    <echo message="Done!"/>
+    <echo message="${echo.separator}"/>
+  </target>
+  
+  <target name="all">
+    <antcall target="expandODD"/>
+    <antcall target="createSchema"/>
+    <antcall target="validateSchema"/>
+    <antcall target="cleanUp"/>
+  </target>
+  
+</project>

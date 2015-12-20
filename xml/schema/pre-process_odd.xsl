@@ -27,16 +27,14 @@
 <!--  Generate @ana values for list[@type='clues']/item. -->
   <xsl:template match="elementSpec[@ident='item']">
     <xsl:copy>
-      <xsl:copy-of select="@* | node()"/>
+      <xsl:apply-templates select="@* | node()"/>
       <attList>
-        <attDef ident="ana" mode="replace">
-          <datatype minOccurs="1">
-            <rng:ref name="data.enumerated"/>
-          </datatype>
-          <valList type="closed">
+        <attDef ident="ana" mode="change">
+          <valList type="closed" mode="add">
             <xsl:for-each select="//taxonomy[@xml:id='clueTypes']/category">
               <valItem ident="crs:{@xml:id}">
-                <desc><xsl:value-of select="catDesc"/></desc>
+                <gloss><xsl:value-of select="gloss"/></gloss>
+                <desc><xsl:value-of select="desc"/></desc>
               </valItem>
             </xsl:for-each>
           </valList>
@@ -48,16 +46,14 @@
   <!--  Generate @ana values for list[@type='clues']/descendant::seg. -->
   <xsl:template match="elementSpec[@ident='seg']">
     <xsl:copy>
-      <xsl:copy-of select="@* | node()"/>
+      <xsl:apply-templates select="@* | node()"/>
       <attList>
-        <attDef ident="ana" mode="replace">
-          <datatype minOccurs="1">
-            <rng:ref name="data.enumerated"/>
-          </datatype>
-          <valList type="closed">
+        <attDef ident="ana" mode="change">
+          <valList type="closed" mode="add">
             <xsl:for-each select="//taxonomy[@xml:id='clueComponents']/category">
               <valItem ident="crs:{@xml:id}">
-                <desc><xsl:value-of select="catDesc"/></desc>
+                <gloss><xsl:value-of select="gloss"/></gloss>
+                <desc><xsl:value-of select="desc"/></desc>
               </valItem>
             </xsl:for-each>
           </valList>
@@ -65,6 +61,10 @@
       </attList>
     </xsl:copy>
   </xsl:template>
+  
+<!-- Annoying things that need suppression. -->
+  <xsl:template match="@part | @default | @full | @instant | @ns | @predeclare
+                       | @status | schemaSpec/@mode | teiHeader/@type"/>
   
   
   

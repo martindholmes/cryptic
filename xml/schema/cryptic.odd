@@ -4,89 +4,108 @@
 	schematypens="http://purl.oclc.org/dsdl/schematron"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader>
-      <fileDesc>
-         <titleStmt>
-            <title>An ODD for Cryptic Crosswords</title>
-            <author><name type="person">Martin Holmes</name></author>
-         </titleStmt>
-         <publicationStmt>
-            <p>Available to anyone for any purpose, anywhere, any time.</p>
-         </publicationStmt>
-         <sourceDesc>
-            <p>Born-digital document created with Oxygen.</p>
-         </sourceDesc>
-      </fileDesc>
-     <encodingDesc>
-        <classDecl>
-           <taxonomy xml:id="clueTypes">
-<!-- NOTE: We currently cannot have both <desc> and <category> in <taxonomy>. 
+    <fileDesc>
+      <titleStmt>
+        <title>An ODD for Cryptic Crosswords</title>
+        <author><name type="person">Martin Holmes</name></author>
+      </titleStmt>
+      <publicationStmt>
+        <p>Available to anyone for any purpose, anywhere, any time.</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Born-digital document created with Oxygen.</p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <classDecl>
+        <taxonomy xml:id="clueTypes">
+          <!-- NOTE: We currently cannot have both <desc> and <category> in <taxonomy>. 
            This seems wrong; issue https://github.com/TEIC/TEI/issues/1415
            addresses this. -->
-              <!--<desc>This taxonomy enumerates the range of types of clue which 
+          <!--<desc>This taxonomy enumerates the range of types of clue which 
               appear in the corpus. This taxonomy is processed to create a set 
               of values for the @ana attribute on <gi>item</gi>.</desc>-->
-              <category xml:id="ctpAnagram">
-                 <catDesc>A clue whose form component consists of an anagram.</catDesc>
-              </category>
-              <category xml:id="ctpCharade">
-                 <catDesc>A clue whose form component consists a series of individual
-                    clued words.</catDesc>
-              </category>
-           </taxonomy>
-           <taxonomy xml:id="clueComponents">
-              <!--<desc>This taxonomy enumerates the different components of clues 
+          <category xml:id="ctpAnagram">
+            <gloss>Anagram</gloss>
+            <desc>A clue whose form component consists of an anagram.</desc>
+          </category>
+          <category xml:id="ctpCharade">
+            <gloss>Charade</gloss>
+            <desc>A clue whose form component consists a series of individual clued words.</desc>
+          </category>
+        </taxonomy>
+        <taxonomy xml:id="clueComponents">
+          <!--<desc>This taxonomy enumerates the different components of clues 
               appearing in the corpus. This taxonomy is processed to create 
               a set of values for @ana appearing on <gi>seg</gi>.</desc>-->
-              <category xml:id="ccpDef">
-                 <catDesc>This part of the clue is the definition of the answer.</catDesc>
-              </category>
-              <category xml:id="ccpForm">
-                 <catDesc>This part of the clue contains instructions for building
-                    the answer.</catDesc>
-              </category>
-           </taxonomy>
-        </classDecl>
-     </encodingDesc>
+          <category xml:id="ccpDef">
+            <gloss>Definition</gloss>
+            <desc>This part of the clue is the definition of the answer.</desc>
+          </category>
+          <category xml:id="ccpForm">
+            <gloss>Form</gloss>
+            <desc>This part of the clue contains instructions for building the answer.</desc>
+          </category>
+        </taxonomy>
+      </classDecl>
+    </encodingDesc>
   </teiHeader>
   <text>
-      <body>
-         <schemaSpec ident="cryptic">
-            <moduleRef key="tei"/>
-            <moduleRef key="core" include="abbr author bibl biblScope choice cit corr date desc editor email emph expan foreign gloss graphic head hi item l lb lb list listBibl measure mentioned name note num orig p ptr pubPlace publisher q quote ref reg resp respStmt rs said series sic soCalled teiCorpus term title unclear"/>
-            <moduleRef key="header" include="abstract appInfo application authority availability catDesc catRef category change correction creation distributor edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage language licence listChange listPrefixDef normalization prefixDef principal profileDesc projectDesc publicationStmt punctuation quotation rendition revisionDesc samplingDecl sourceDesc sponsor styleDefDecl taxonomy teiHeader titleStmt xenoData"/>
-            <moduleRef key="textstructure" include="TEI back body byline dateline div ipigraph front signed text"/>
-            <moduleRef key="namesdates" include="addName affiliation age birth country death event forename genName geo listEvent listOrg listPerson listPlace listRelation location nameLink occupation org orgName persName person personGrp place placeName relation roleName surname trait"/>
-            <moduleRef key="figures" include="cell figDesc figure formula notatedMusic row table"/>
-            <moduleRef key="gaiji" include="char charDecl charName charProp g glyph glyphName mapping unicodeName value"/>
-            <moduleRef key="analysis" include="c cl interp interpGrp pc phr s span spanGrp w"/>
-            <moduleRef key="linking" include="ab link linkGrp seg"/>
-           
-           <elementSpec ident="item" module="core" mode="change">
-             <constraintSpec ident="anaOnItem" scheme="isoschematron" >
-               <constraint>
-                 <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="if (parent::list[@type='clues']) then @ana else not(@ana)"
-                   role="error">              
-                   The @ana attribute must always be supplied on item elements which are clues (children
-                   of list[@type='clues']; however, it must not be supplied in other cases.</assert>
-               </constraint>
-             </constraintSpec>
-           </elementSpec>
+    <body>
+      <schemaSpec ident="cryptic">
+        <moduleRef key="tei"/>
+        <moduleRef key="core"
+          include="abbr author bibl biblScope choice cit corr date desc editor email emph expan foreign gloss graphic head hi item l lb lb list listBibl measure mentioned name note num orig p ptr pubPlace publisher q quote ref reg resp respStmt rs said series sic soCalled teiCorpus term title unclear"/>
+        <moduleRef key="header"
+          include="abstract appInfo application authority availability catDesc catRef category change correction creation distributor edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage language licence listChange listPrefixDef normalization prefixDef principal profileDesc projectDesc publicationStmt punctuation quotation rendition revisionDesc samplingDecl sourceDesc sponsor styleDefDecl taxonomy teiHeader titleStmt xenoData"/>
+        <moduleRef key="textstructure"
+          include="TEI back body byline dateline div ipigraph front signed text"/>
+        <moduleRef key="namesdates"
+          include="addName affiliation age birth country death event forename genName geo listEvent listOrg listPerson listPlace listRelation location nameLink occupation org orgName persName person personGrp place placeName relation roleName surname trait"/>
+        <moduleRef key="figures" include="cell figDesc figure formula notatedMusic row table"/>
+        <moduleRef key="gaiji"
+          include="char charDecl charName charProp g glyph glyphName mapping unicodeName value"/>
+        <moduleRef key="analysis"/>
+        <moduleRef key="linking" include="ab link linkGrp seg"/>
 
-        
-            <elementSpec ident="seg" module="linking" mode="change">
-              <constraintSpec ident="anaOnSeg" scheme="isoschematron" >
-                <constraint>
-                  <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="if (ancestor::list[@type='clues']) then @ana else not(@ana)"
-                    role="error">              
-                    The @ana attribute must always be supplied on seg elements which part of clues 
-                    (descendants of list[@type='clues']; however, it must not be supplied in other 
-                    cases.</assert>
-                </constraint>
-              </constraintSpec>
-            </elementSpec>
-        </schemaSpec>
-        
-        
-      </body>
+        <classSpec ident="att.global.linking"
+          module="linking"
+          type="atts"
+          mode="change">
+          <attList>
+            <attDef ident="synch" mode="delete"/>
+            <attDef ident="copyOf" mode="delete"/>
+            <attDef ident="exclude" mode="delete"/>
+            <attDef ident="select" mode="delete"/>
+          </attList>
+        </classSpec>
+
+        <elementSpec ident="item" module="core" mode="change">
+          <constraintSpec ident="anaOnItem" scheme="isoschematron" mode="add">
+            <constraint>
+              <assert xmlns="http://purl.oclc.org/dsdl/schematron"
+                test="if (parent::list[@type='clues']) then @ana else not(@ana)" role="error"> The
+                @ana attribute must always be supplied on item elements which are clues (children of
+                list[@type='clues']; however, it must not be supplied in other cases.</assert>
+            </constraint>
+          </constraintSpec>
+        </elementSpec>
+
+
+        <elementSpec ident="seg" module="linking" mode="change">
+          <constraintSpec ident="anaOnSeg" scheme="isoschematron" mode="add">
+            <constraint>
+              <assert xmlns="http://purl.oclc.org/dsdl/schematron"
+                test="if (ancestor::list[@type='clues']) then @ana else not(@ana)" role="error"> The
+                @ana attribute must always be supplied on seg elements which part of clues
+                (descendants of list[@type='clues']; however, it must not be supplied in other
+                cases.</assert>
+            </constraint>
+          </constraintSpec>
+        </elementSpec>
+      </schemaSpec>
+
+
+    </body>
   </text>
 </TEI>
