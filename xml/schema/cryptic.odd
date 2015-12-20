@@ -84,7 +84,7 @@
           <constraintSpec ident="anaOnItem" scheme="isoschematron" mode="add">
             <constraint>
               <assert xmlns="http://purl.oclc.org/dsdl/schematron"
-                test="if (parent::list[@type='clues']) then @ana else not(@ana)" role="error"> The
+                test="if (parent::tei:list[@type='clues']) then @ana else not(@ana)" role="error"> The
                 @ana attribute must always be supplied on item elements which are clues (children of
                 list[@type='clues']; however, it must not be supplied in other cases.</assert>
             </constraint>
@@ -96,7 +96,7 @@
           <constraintSpec ident="anaOnSeg" scheme="isoschematron" mode="add">
             <constraint>
               <assert xmlns="http://purl.oclc.org/dsdl/schematron"
-                test="if (ancestor::list[@type='clues']) then @ana else not(@ana)" role="error"> The
+                test="if (ancestor::tei:list[@type='clues']) then @ana else not(@ana)" role="error"> The
                 @ana attribute must always be supplied on seg elements which part of clues
                 (descendants of list[@type='clues']; however, it must not be supplied in other
                 cases.</assert>

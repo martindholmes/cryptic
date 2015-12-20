@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../schema/cryptic.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../schema/cryptic.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="template">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title></title>
+      </titleStmt>
+      <publicationStmt>
+        <p>Available to anyone for any purpose, anywhere, any time.</p>
+      </publicationStmt>
+      <sourceDesc>
+        <bibl>
+          <title level="j">The Times</title>
+          <date when="1930-01-20"/>
+          <author></author>
+        </bibl>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Heading if there is one</head>
+        <table>
+          <row>
+            <cell></cell>
+          </row>
+        </table>
+        <div type="clues">
+          <div type="cluesAcross">
+            <list type="clues">
+              <item ana="crs:ctpAnagram"></item>
+            </list>
+          </div>
+          <div type="cluesDown">
+            <list type="clues">
+              <item ana="crs:ctpCharade"></item>
+            </list>
+          </div>
+        </div>
+      </div>
+    </body>
+  </text>
+</TEI>
