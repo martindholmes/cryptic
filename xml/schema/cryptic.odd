@@ -25,6 +25,11 @@
           <!--<desc>This taxonomy enumerates the range of types of clue which 
               appear in the corpus. This taxonomy is processed to create a set 
               of values for the @ana attribute on <gi>item</gi>.</desc>-->
+          
+          <category xml:id="ctpUnknown">
+            <gloss>Unknown</gloss>
+            <desc>Unknown or as-yet unspecified form of clue.</desc>
+          </category>
           <category xml:id="ctpAnagram">
             <gloss>Anagram</gloss>
             <desc>A clue whose form component consists of an anagram.</desc>
@@ -38,6 +43,10 @@
           <!--<desc>This taxonomy enumerates the different components of clues 
               appearing in the corpus. This taxonomy is processed to create 
               a set of values for @ana appearing on <gi>seg</gi>.</desc>-->
+          <category xml:id="ccpUnknown">
+            <gloss>Unknown</gloss>
+            <desc>Unknown or as-yet unspecified type of clue component.</desc>
+          </category>
           <category xml:id="ccpDef">
             <gloss>Definition</gloss>
             <desc>This part of the clue is the definition of the answer.</desc>

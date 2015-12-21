@@ -1,43 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Generate a crossword file in TEI</title>
-        <meta charset="utf-8" />
-        <script type="text/ecmascript" src="js/generate_tei.js">
+  <head>
+    <title>Generate a crossword file in TEI</title>
+    <meta charset="utf-8" />
+    <script type="text/ecmascript" src="js/generate_tei.js">
 
         </script>
-        <link rel="stylesheet" type="text/css" href="css/generate_tei.css">
-        </link>
-    </head>
-    <body>
-        <h1>
-            Generate a crossword file in TEI
-        </h1>
-        <form>
-        <div id="controls">
-            
-            <label for="gridSize">Grid size:</label> <input id="gridSize" type="text" onchange="validateInteger(this)" size="2" onkeyup="validateInteger(this)" pattern="[0-9]{1,2}" 
-                value="15" title="An integer between 8 and 32."></input>
-            <button onclick="generateGrid(); return false;">Generate grid</button><br/>
-            <input id="symmetricalGrid" type="checkbox" checked="checked"/>
-            <label for="symmetricalGrid">Symmetrical grid</label><br/>
-            <button id="btnFillClues" onclick="fillClues(); return false;">Fill clues</button><br/>
-        </div>
-        </form>
-        <div id="clues">
-            <div id="across">
-                <h3>Across</h3>
-                
-            </div>
-            <div id="down">
-                <h3>Down</h3>
-                
-            </div>
-        </div>
-        <div id="grid">
-            
-        </div>
-        
-    </body>
+    <link rel="stylesheet" type="text/css" href="css/generate_tei.css"> </link>
+  </head>
+  <body>
+    <h1> Generate a crossword file in TEI </h1>
+    <form>
+      <div id="controls">
+        <label for="gridSize">Grid size:</label>
+        <input id="gridSize" type="text" onchange="validateInteger(this)" size="2"
+          onkeyup="validateInteger(this)" pattern="[0-9]{1,2}" value="15"
+          title="An integer between 8 and 32." />
+        <button onclick="generateGrid(); return false;">Generate grid</button><br />
+        <input id="symmetricalGrid" type="checkbox" checked="checked" />
+        <label for="symmetricalGrid">Symmetrical grid</label><br />
+        <button id="btnFillClues" onclick="fillClues(); return false;">Fill clues</button><br />
+        <button id="btnGenerateTei" onclick="generateTei(); return false;">Generate
+        TEI</button><br />
+      </div>
+    </form>
+    <div id="clues">
+      <div id="across">
+        <h3>Across</h3>
+      </div>
+      <div id="down">
+        <h3>Down</h3>
+      </div>
+    </div>
+    <div id="grid"> </div>
+  </body>
 </html>

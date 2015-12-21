@@ -31,12 +31,12 @@
         <div type="clues">
           <div type="cluesAcross">
             <list type="clues">
-              <item ana="crs:ctpAnagram"></item>
+              <item ana="crs:ctpUnknown"></item>
             </list>
           </div>
           <div type="cluesDown">
             <list type="clues">
-              <item ana="crs:ctpCharade"></item>
+              <item ana="crs:ctpUnknown"></item>
             </list>
           </div>
         </div>

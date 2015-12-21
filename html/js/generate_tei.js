@@ -1,6 +1,8 @@
 /* Code for the TEI file generator; creates a crossword 
    framework file through a simple GUI on a web page. */
 
+var xmlTemplateUrl = 'https://raw.githubusercontent.com/martindholmes/cryptic/master/xml/template/crossword.xml';
+var teiNS = 'http://www.tei-c.org/ns/1.0';
 var grid = null;
 
 //Validate the input is an integer within range.
@@ -60,6 +62,7 @@ function generateGrid(){
   gridDiv.appendChild(table);
   grid = table;
   document.getElementById('btnFillClues').style.visibility = 'visible';
+  document.getElementById('btnGenerateTei').style.visibility = 'visible';
   document.getElementById('clues').style.visibility = 'visible';
 }
 
@@ -214,3 +217,65 @@ function checkClueLength(sender, length){
   }
 }
 
+/* This function retrieves the template file for a TEI crossword 
+   encoding from the code repo of this project on GitHub. 
+   We work with responseText because GitHub serves the file as 
+   text/plain.
+*/
+var teiTemplate = '';
+var teiDoc = null;
+
+function getXmlTemplate(){
+  req = new XMLHttpRequest();
+  req.onreadystatechange=function(){
+    if (req.readyState === XMLHttpRequest.DONE) {
+      if (req.status === 200) {
+        teiTemplate = req.responseText;
+        teiDoc = new DOMParser().parseFromString(teiTemplate, "application/xml");
+        //var teiTables = teiDoc.getElementsByTagNameNS(teiNS, 'table');
+        //alert('Found ' + teiTables.length + ' tables in the document.')
+      } 
+      else {
+        alert('Warning: unable to retrieve the TEI template file for the crossword.');
+      }
+    }
+  };
+  req.open('GET', xmlTemplateUrl);
+  req.send();
+}
+
+window.addEventListener('load', getXmlTemplate, false);
+
+function createTeiGrid(){
+  var htmlGrid = document.getElementById('grid');
+  if (htmlGrid == null){return false;}
+  var teiTables = teiDoc.getElementsByTagNameNS(teiNS, 'table');
+  if (teiTables.length < 1){return false;}
+  var teiGrid = teiDoc.getElementsByTagNameNS(teiNS, 'table')[0];
+  for (var i=teiGrid.childNodes.length-1; i>=0; i--){
+    teiGrid.removeChild(teiGrid.childNodes[i]);
+  }
+  var htmlRows = htmlGrid.getElementsByTagName('tr');
+  for (var r=0; r<htmlRows.length; r++){
+    var htmlCells = htmlRows[r].getElementsByTagName('td');
+    var row = teiDoc.createElementNS(teiNS, 'row');
+    teiGrid.appendChild(row);
+    for (var c=0; c<htmlCells.length; c++){
+      var cell = teiDoc.createElementNS(teiNS, 'cell');
+      if (blackRegExp.test(htmlCells[c].style.backgroundColor)){
+        cell.setAttribute('role', 'black');
+      }
+      if (htmlCells[c].getElementsByTagName('span').length > 0){
+        cell.setAttribute('n', htmlCells[c].getElementsByTagName('span')[0].textContent);
+      }
+      row.appendChild(cell);
+    }
+  }
+  return false;
+}
+
+function generateTei(){
+  createTeiGrid();
+  alert(new XMLSerializer().serializeToString(teiDoc));
+  return false;
+}

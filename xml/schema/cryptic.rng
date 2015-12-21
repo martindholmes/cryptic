@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2015-12-20T22:09:52Z. .
+Schema generated from ODD source 2015-12-20T23:22:30Z. .
 TEI Edition: Version 2.8.0. Last updated on
 	6th April 2015, revision 13197
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.8.0/
@@ -3250,6 +3250,8 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
                <list>
                   <oneOrMore>
                      <choice>
+                        <value>crs:ctpUnknown</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unknown) Unknown or as-yet unspecified form of clue.</a:documentation>
                         <value>crs:ctpAnagram</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Anagram) A clue whose form component consists of an anagram.</a:documentation>
                         <value>crs:ctpCharade</value>
@@ -6318,6 +6320,8 @@ The attributes @to and @from on <name/> may each contain only a single value</re
                <list>
                   <oneOrMore>
                      <choice>
+                        <value>crs:ccpUnknown</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unknown) Unknown or as-yet unspecified type of clue component.</a:documentation>
                         <value>crs:ccpDef</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Definition) This part of the clue is the definition of the answer.</a:documentation>
                         <value>crs:ccpForm</value>
