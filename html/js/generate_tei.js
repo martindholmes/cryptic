@@ -62,7 +62,6 @@ function generateGrid(){
   gridDiv.appendChild(table);
   grid = table;
   document.getElementById('btnFillClues').style.visibility = 'visible';
-  document.getElementById('btnGenerateTei').style.visibility = 'visible';
   document.getElementById('clues').style.visibility = 'visible';
 }
 
@@ -125,9 +124,11 @@ function fillClues(){
     if (clearClues() == false){
       return false;
     }
-    var acrossList = document.createElement('ol');
+    var acrossList = document.createElement('ul');
+    acrossList.setAttribute('class', 'clueList');
     document.getElementById('across').appendChild(acrossList);
-    var downList = document.createElement('ol');
+    var downList = document.createElement('ul');
+    downList.setAttribute('class', 'clueList');
     document.getElementById('down').appendChild(downList);
     for (var rowNum = 0; rowNum<rows.length; rowNum++){
       var cells = rows[rowNum].getElementsByTagName('td');
@@ -156,6 +157,7 @@ function fillClues(){
       }
     }
   }
+  document.getElementById('btnGenerateTei').style.visibility = 'visible';
   return false;
 }
 
@@ -174,11 +176,18 @@ function clearClues(){
 
 function createClue(list, num, length){
   var item = document.createElement('li');
-  item.setAttribute('value', num);
+  item.setAttribute('data-length', num);
+  var numSpan = document.createElement('span');
+  numSpan.setAttribute('class', 'clueNum');
+  numSpan.setAttribute('contenteditable', 'true');
+  numSpan.setAttribute('onkeyup', 'checkClueLength(this, ' + num + ')');
+  var t = document.createTextNode(num);
+  numSpan.appendChild(t);
+  item.appendChild(numSpan);
   var clue = document.createElement('span');
   clue.setAttribute('class', 'clue');
   clue.setAttribute('contenteditable', 'true');
-  var t = document.createTextNode('clue');
+  t = document.createTextNode('clue');
   clue.appendChild(t);
   item.appendChild(clue);
   var len = document.createElement('span');
@@ -198,22 +207,27 @@ function createClue(list, num, length){
 }
 
 function checkClueLength(sender, length){
-  var len = sender.textContent;
-  var lenClean = len.replace('\s+', '');
-  if (lenClean != len){
-    len = lenClean;
-    sender.textContent = len;
-  }
-  var lens = len.split(',');
-  var newLen = 0;
-  for (var i=0; i<lens.length; i++){newLen += parseInt(lens[i]);}
-  if ((!(lenRegExp.test(len))) || (newLen != length)){
-    sender.style.backgroundColor = '#ffc0c0';
-    sender.setAttribute('title', lenNotCorrect + length + '.');
+  if (sender.getAttribute('class') == 'clueNum'){
+    
   }
   else{
-    sender.style.backgroundColor = white;
-    sender.setAttribute('title', '');
+    var len = sender.textContent;
+    var lenClean = len.replace('\s+', '');
+    if (lenClean != len){
+      len = lenClean;
+      sender.textContent = len;
+    }
+    var lens = len.split(',');
+    var newLen = 0;
+    for (var i=0; i<lens.length; i++){newLen += parseInt(lens[i]);}
+    if ((!(lenRegExp.test(len))) || (newLen != length)){
+      sender.style.backgroundColor = '#ffc0c0';
+      sender.setAttribute('title', lenNotCorrect + length + '.');
+    }
+    else{
+      sender.style.backgroundColor = white;
+      sender.setAttribute('title', '');
+    }
   }
 }
 

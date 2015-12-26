@@ -23,6 +23,25 @@ div#across, div#down{
   text-align: left;
 }
 
+ul.clueList{
+  list-style-type: none;
+}
+
+ul.clueList li{
+  margin-left: 2em;
+  text-indent: -2em;
+}
+
+ul.clueList li span.clueNum{
+  font-weight: bold;
+  display: inline-block;
+  margin-right: 1ex;
+}
+
+ul.clueList li span.clueNum:after{
+  content: ".";
+}
+
 span.clue{
   margin-right: 0.5em;
 }
@@ -60,7 +79,7 @@ table.grid td{
   background-color: #ffffff;
 }
 
-span.clueNum{
+td span.clueNum{
   vertical-align: super;
   font-size: 70%;
   position: relative;
