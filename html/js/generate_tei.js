@@ -12,7 +12,7 @@ var black = 'rgb(0, 0, 0)';
 var white = 'rgb(255, 255, 255)';
 var blackRegExp = /^rgb\(\s*0,\s*0,\s*0\s*\)$/i;
 var whiteRegExp = /^rgb\(\s*255,\s*255,\s*255\s*\)$/i;
-var lenRegExp = /^[0-9]+(,[0-9]+)*$/;
+var lenRegExp = /^[0-9]+(,\s*[0-9]+)*$/;
 var lenNotCorrect = 'The stated length of this answer is not correct; it should be ';
 
 function validateInteger(sender){
@@ -207,8 +207,15 @@ function createClue(list, num, length){
 }
 
 function checkClueLength(sender, length){
+//If it's the clue number which has been edited:
   if (sender.getAttribute('class') == 'clueNum'){
-    
+//First, for annoying Firefox bug, we have to filter out unwanted
+//<br> tags (or any tags).
+    for (var i=sender.childNodes.length-1; i>=0; i--){
+      if (sender.childNodes[i].nodeType == Node.ELEMENT_NODE){
+        sender.removeChild(sender.childNodes[i]);
+      }
+    }
   }
   else{
     var len = sender.textContent;
