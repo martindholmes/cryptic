@@ -28,14 +28,17 @@ ul.clueList{
 }
 
 ul.clueList li{
-  margin-left: 2em;
+/*Not yet supported by any browser. */
+  /*text-indent: 2em hanging;*/
+  padding-left: 2em;
   text-indent: -2em;
 }
 
 ul.clueList li span.clueNum{
   font-weight: bold;
-  display: inline-block;
-  margin-right: 1ex;
+  margin-right: 1em;
+  /*display: inline-block;
+  margin-right: 1ex;*/
 }
 
 ul.clueList li span.clueNum:after{

@@ -13,7 +13,10 @@ var white = 'rgb(255, 255, 255)';
 var blackRegExp = /^rgb\(\s*0,\s*0,\s*0\s*\)$/i;
 var whiteRegExp = /^rgb\(\s*255,\s*255,\s*255\s*\)$/i;
 var lenRegExp = /^[0-9]+(,\s*[0-9]+)*$/;
+var clueNumRegExp = /^(\d+\s?(([AaDd][croswn\.]*)*(,\s*)?)*)+$/;
+var intRegExp = /^\d+$/;
 var lenNotCorrect = 'The stated length of this answer is not correct; it should be ';
+var clueNumNotCorrect = 'This clue number specification is not expected: ';
 
 function validateInteger(sender){
     if ((sender.value.match('^[0-9]{1,2}')) && (parseInt(sender.value) >= minGridSize) && (parseInt(sender.value) <= maxGridSize)){
@@ -176,11 +179,12 @@ function clearClues(){
 
 function createClue(list, num, length){
   var item = document.createElement('li');
-  item.setAttribute('data-length', num);
+  item.setAttribute('data-length', length);
+  item.setAttribute('data-num', num);
   var numSpan = document.createElement('span');
   numSpan.setAttribute('class', 'clueNum');
   numSpan.setAttribute('contenteditable', 'true');
-  numSpan.setAttribute('onkeyup', 'checkClueLength(this, ' + num + ')');
+  numSpan.setAttribute('onkeyup', 'checkClueLength(this, ' + length + ')');
   var t = document.createTextNode(num);
   numSpan.appendChild(t);
   item.appendChild(numSpan);
@@ -207,13 +211,32 @@ function createClue(list, num, length){
 }
 
 function checkClueLength(sender, length){
-//If it's the clue number which has been edited:
-  if (sender.getAttribute('class') == 'clueNum'){
 //First, for annoying Firefox bug, we have to filter out unwanted
 //<br> tags (or any tags).
-    for (var i=sender.childNodes.length-1; i>=0; i--){
-      if (sender.childNodes[i].nodeType == Node.ELEMENT_NODE){
-        sender.removeChild(sender.childNodes[i]);
+  for (var i=sender.childNodes.length-1; i>=0; i--){
+    if (sender.childNodes[i].nodeType === Node.ELEMENT_NODE){
+      sender.removeChild(sender.childNodes[i]);
+    }
+  }
+//If it's the clue number which has been edited:
+  if (sender.getAttribute('class') == 'clueNum'){
+//Next, we check to ensure the content matches the regex.
+    if (!(clueNumRegExp.test(sender.textContent))){
+      sender.style.backgroundColor = '#ffc0c0';
+      sender.setAttribute('title', clueNumNotCorrect + sender.textContent);
+      return;
+    }
+//Next, we parse the content to see if it's simple or complex.
+    if (intRegExp.test(sender.textContent)){
+      if (sender.textContent == sender.getAttribute('data-num')){
+        sender.style.backgroundColor = white;
+        sender.setAttribute('title', '');
+        return;
+      }
+      else{
+        sender.style.backgroundColor = '#ffc0c0';
+        sender.setAttribute('title', clueNumNotCorrect + sender.textContent);
+        return;
       }
     }
   }
