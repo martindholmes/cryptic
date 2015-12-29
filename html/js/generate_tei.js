@@ -151,10 +151,10 @@ function fillClues(){
           n.appendChild(t);
           cells[colNum].appendChild(n);
           if (horLights > 1){
-            createClue(acrossList, clueNum, horLights);
+            createClue(acrossList, clueNum, horLights, 'a');
           }
           if (verLights > 1){
-            createClue(downList, clueNum, verLights);
+            createClue(downList, clueNum, verLights, 'd');
           }
         }
       }
@@ -177,12 +177,14 @@ function clearClues(){
   }
 }
 
-function createClue(list, num, length){
+function createClue(list, num, length, prefix){
   var item = document.createElement('li');
   item.setAttribute('data-length', length);
   item.setAttribute('data-num', num);
+  item.setAttribute('id', prefix + num);
   var numSpan = document.createElement('span');
   numSpan.setAttribute('class', 'clueNum');
+  numSpan.setAttribute('id', prefix + num + '_num');
   numSpan.setAttribute('contenteditable', 'true');
   numSpan.setAttribute('onkeyup', 'checkClueLength(this, ' + length + ')');
   var t = document.createTextNode(num);
@@ -190,12 +192,14 @@ function createClue(list, num, length){
   item.appendChild(numSpan);
   var clue = document.createElement('span');
   clue.setAttribute('class', 'clue');
+  clue.setAttribute('id', prefix + num + '_clue');
   clue.setAttribute('contenteditable', 'true');
   t = document.createTextNode('clue');
   clue.appendChild(t);
   item.appendChild(clue);
   var len = document.createElement('span');
   len.setAttribute('class', 'len');
+  numSpan.setAttribute('id', prefix + num + '_len');
   len.setAttribute('contenteditable', 'true');
   len.setAttribute('onkeyup', 'checkClueLength(this, ' + length + ')');
   var n = document.createTextNode(length);
@@ -218,6 +222,8 @@ function checkClueLength(sender, length){
       sender.removeChild(sender.childNodes[i]);
     }
   }
+//Get the id prefix from the parent id.
+  var idPrefix = sender.parentNode.getAttribute('id');
 //If it's the clue number which has been edited:
   if (sender.getAttribute('class') == 'clueNum'){
 //Next, we check to ensure the content matches the regex.
@@ -228,15 +234,17 @@ function checkClueLength(sender, length){
     }
 //Next, we parse the content to see if it's simple or complex.
     if (intRegExp.test(sender.textContent)){
-      if (sender.textContent == sender.getAttribute('data-num')){
+      if (sender.textContent == sender.parentNode.getAttribute('data-num')){
         sender.style.backgroundColor = white;
         sender.setAttribute('title', '');
         return;
       }
       else{
+//Set the display back to normal
         sender.style.backgroundColor = '#ffc0c0';
         sender.setAttribute('title', clueNumNotCorrect + sender.textContent);
-        return;
+//We're dealing with a single clue linking multiple answer slots.
+        checkMultiAnswerClueLength(sender, sender.parentNode);
       }
     }
   }
@@ -251,14 +259,41 @@ function checkClueLength(sender, length){
     var newLen = 0;
     for (var i=0; i<lens.length; i++){newLen += parseInt(lens[i]);}
     if ((!(lenRegExp.test(len))) || (newLen != length)){
-      sender.style.backgroundColor = '#ffc0c0';
-      sender.setAttribute('title', lenNotCorrect + length + '.');
+      var clueNum = document.getElementById(idPrefix + '_num');
+      if (intRegExp.test(clueNum)){
+//This is supposed to be a simple clue, so it's just wrong
+        sender.style.backgroundColor = '#ffc0c0';
+        sender.setAttribute('title', lenNotCorrect + length + '.');
+        return;
+      }
+      else{
+        if (clueNumRegExp.test(sender.textContent)){
+//Set the display back to normal
+          sender.style.backgroundColor = '#ffc0c0';
+          sender.setAttribute('title', clueNumNotCorrect + sender.textContent);
+  //We're dealing with a single clue linking multiple answer slots.
+          checkMultiAnswerClueLength(sender, sender.parentNode);
+        }
+        else{
+//This is a mess all round.
+          sender.style.backgroundColor = '#ffc0c0';
+          sender.setAttribute('title', lenNotCorrect + length + '.');
+          return;
+        }
+      }
     }
     else{
       sender.style.backgroundColor = white;
       sender.setAttribute('title', '');
     }
   }
+}
+
+function checkMultiAnswerClueLength(lastEditedComponent, item){
+  var idPrefix = item.getAttribute('id');
+  var num = document.getElementById(idPrefix + '_num');
+  var len = document.getElementById(idPrefix + '_len');
+//TODO: Complete this.  
 }
 
 /* This function retrieves the template file for a TEI crossword 
