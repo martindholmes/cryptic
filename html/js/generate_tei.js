@@ -15,6 +15,7 @@ var whiteRegExp = /^rgb\(\s*255,\s*255,\s*255\s*\)$/i;
 var lenRegExp = /^[0-9]+(,\s*[0-9]+)*$/;
 var clueNumRegExp = /^(\d+\s?(([AaDd][croswn\.]*)*(,\s*)?)*)+$/;
 var intRegExp = /^\d+$/;
+var downRegExp = /[dD]/;
 var lenNotCorrect = 'The stated length of this answer is not correct; it should be ';
 var clueNumNotCorrect = 'This clue number specification is not expected: ';
 
@@ -186,7 +187,7 @@ function createClue(list, num, length, prefix){
   numSpan.setAttribute('class', 'clueNum');
   numSpan.setAttribute('id', prefix + num + '_num');
   numSpan.setAttribute('contenteditable', 'true');
-  numSpan.setAttribute('onkeyup', 'checkClueLength(this, ' + length + ')');
+  numSpan.setAttribute('onblur', 'checkClueLength(this, ' + length + ')');
   var t = document.createTextNode(num);
   numSpan.appendChild(t);
   item.appendChild(numSpan);
@@ -199,9 +200,9 @@ function createClue(list, num, length, prefix){
   item.appendChild(clue);
   var len = document.createElement('span');
   len.setAttribute('class', 'len');
-  numSpan.setAttribute('id', prefix + num + '_len');
+  len.setAttribute('id', prefix + num + '_len');
   len.setAttribute('contenteditable', 'true');
-  len.setAttribute('onkeyup', 'checkClueLength(this, ' + length + ')');
+  len.setAttribute('onblur', 'checkClueLength(this, ' + length + ')');
   var n = document.createTextNode(length);
   len.appendChild(n);
   item.appendChild(len);
@@ -241,10 +242,11 @@ function checkClueLength(sender, length){
       }
       else{
 //Set the display back to normal
-        sender.style.backgroundColor = '#ffc0c0';
-        sender.setAttribute('title', clueNumNotCorrect + sender.textContent);
+        sender.style.backgroundColor = '#ffffff';
+        sender.setAttribute('title', '');
 //We're dealing with a single clue linking multiple answer slots.
         checkMultiAnswerClueLength(sender, sender.parentNode);
+        return;
       }
     }
   }
@@ -273,6 +275,7 @@ function checkClueLength(sender, length){
           sender.setAttribute('title', clueNumNotCorrect + sender.textContent);
   //We're dealing with a single clue linking multiple answer slots.
           checkMultiAnswerClueLength(sender, sender.parentNode);
+          return;
         }
         else{
 //This is a mess all round.
@@ -293,7 +296,72 @@ function checkMultiAnswerClueLength(lastEditedComponent, item){
   var idPrefix = item.getAttribute('id');
   var num = document.getElementById(idPrefix + '_num');
   var len = document.getElementById(idPrefix + '_len');
-//TODO: Complete this.  
+//First we need to get an array of the ids of all the linked elements.
+  var nums = num.textContent.split('[,;]\s*');
+  var dir = idPrefix.substring(0,1);
+  var otherDir = (dir == 'a')?'d':'a';
+  var clues = new Array();
+  clues.push(item);
+  for (var i=1; i<nums.length; i++){
+    if (intRegExp.test(nums[i])){
+//No dir is specified. This means there's only one, or it inherits from
+//the first one.
+      var thisNum = parseInt(nums[i]);
+      if (document.getElementById(dir + thisNum.toString())){
+        clues.push(document.getElementById(dir + thisNum.toString()));
+      }
+      else{
+        if (document.getElementById(otherDir + thisNum.toString())){
+          clues.push(document.getElementById(otherDir + thisNum.toString()));
+        }
+        else{
+//Unparseable; we have to fail.
+          num.style.backgroundColor = '#ffc0c0';
+          num.setAttribute('title', lenNotCorrect + length + '.');
+          return false;
+        }
+      }
+    }
+    else{
+//It has a dir specifier in it.
+      var thisNum = parseInt(replace(nums[i], '[^0-9]+', ''));
+      if (downRegExp.test(nums[i])){
+        if (document.getElementById('d' + thisNum.toString())){
+          clues.push(document.getElementById('d' + thisNum.toString()));
+        }
+        else{
+          if (document.getElementById('a' + thisNum.toString())){
+            clues.push(document.getElementById('a' + thisNum.toString()));
+          }
+          else{
+//Unparseable; we have to fail.
+            num.style.backgroundColor = '#ffc0c0';
+            num.setAttribute('title', lenNotCorrect + length + '.');
+            return false;            
+          }
+        }
+      }
+    }
+  }
+//Now we total up the length of all the items listed.
+  var totalLength = 0;
+  for (var i=0; i<clues.length; i++){
+    totalLength += parseInt(clues[i].getAttribute('data-length'));
+  }
+//Now we total up the length of the components of this clue.
+  var specifiedLengths = len.textContent.split('\s*[,\-]\s*');
+  var totalSpecifiedLength = 0;
+  for (var i=0; i<specifiedLengths.length; i++){
+    totalSpecifiedLength += parseInt(specifiedLengths[i]);
+  }
+  if (totalLength != totalSpecifiedLength){
+    len.style.backgroundColor = '#ffc0c0';
+    len.setAttribute('title', lenNotCorrect + length + '.');
+    return false;
+  }
+  
+//No failures or errors found; this passes.
+  return true;
 }
 
 /* This function retrieves the template file for a TEI crossword 
