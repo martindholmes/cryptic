@@ -9,20 +9,31 @@
         <editor><persName>Martin Holmes</persName></editor>
       </titleStmt>
       <publicationStmt>
-        <p>Encoding and annotations free for any purpose; original clues remain
-        the property of their authors, and are used as representative samples 
-        or quotations for illustrative purposes.</p>
+        <p>Encoding and annotations free for any purpose; original clues remain the property of
+          their authors, and are used as representative samples or quotations for illustrative
+          purposes.</p>
       </publicationStmt>
       <sourceDesc>
-        <p>This is a born-digital file; individual encoded example clues have
-        their own sources identified in the bibliography.</p>
+        <p>This is a born-digital file; individual encoded example clues have their own sources
+          identified in the bibliography.</p>
       </sourceDesc>
     </fileDesc>
   </teiHeader>
-  <body>
-    <head>
-      Example clue encodings
-    </head>
-    
-  </body>
+  <text>
+    <body>
+      <head>Example clue encodings for development, testing and illustration</head>
+      <list type="clues">
+        
+        <item ana="crs:ctpWordsInWords" n="secure" source="bibl:xwDt_2002">
+          <anchor xml:id="item_001_1"/><seg ana="crs:ccpDef">Guard</seg> <seg ana="crs:ccpForm">dog<anchor xml:id="item_001_2"/> <seg ana="crs:ccpSignal">kept within</seg> sight</seg> <seg ana="crs:ccpLength">(6)</seg>
+          <span ana="crs:ccpMisdirection" from="#item_001_1" to="#item_001_2">The phrase "guard dog" crosses the 
+          definition/form boundary.</span>
+        </item>
+        
+        <item ana="crs:ctpUnclassified" n="scrambled eggs" source="bibl:UNKNOWN">
+          <seg ana="crs:ccpDef crs:ccpForm">Gegs</seg>
+        </item>
+      </list>
+    </body>
+  </text>
 </TEI>

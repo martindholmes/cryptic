@@ -21,10 +21,14 @@
     </xd:desc>
   </xd:doc>
   
+  <xsl:variable name="bibliography" select="doc('../bibl.xml')"/>
+  
   <xsl:output xml:space="preserve" method="xml" encoding="UTF-8" exclude-result-prefixes="#all" normalization-form="NFC" indent="yes"/>
   
   
-<!--  Generate @ana values for list[@type='clues']/item. -->
+  <xd:doc scope="component">
+    <xd:desc>Generate @ana values for list[@type='clues']/item from taxonomy.</xd:desc>
+  </xd:doc>
   <xsl:template match="elementSpec[@ident='item']">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()"/>
@@ -43,8 +47,10 @@
     </xsl:copy>
   </xsl:template>
   
-  <!--  Generate @ana values for list[@type='clues']/descendant::seg. -->
-  <xsl:template match="elementSpec[@ident='seg']">
+  <xd:doc scope="component">
+    <xd:desc>Generate @ana values for list[@type='clues']/descendant::seg and span from taxonomy.</xd:desc>
+  </xd:doc>
+  <xsl:template match="elementSpec[@ident='seg'] | elementSpec[@ident='span']">
     <xsl:copy>
       <xsl:apply-templates select="@* | node()"/>
       <attList>
@@ -62,13 +68,38 @@
     </xsl:copy>
   </xsl:template>
   
+  <xd:doc scope="component">
+    <xd:desc>Generate @source values from bibliography entries.</xd:desc>
+  </xd:doc>
+  <xsl:template match="classSpec[@ident='att.global.source']/attList/attDef[@ident='source']/valList">
+    <xsl:copy>
+      <xsl:apply-templates select="@* | node()"/>
+      <valItem ident="bibl:UNKNOWN">
+        <gloss>Unknown source</gloss>
+        <desc>Item, clue or puzzle whose original source is unknown.</desc>
+      </valItem>
+      <xsl:for-each select="$bibliography//bibl[@xml:id]">
+        <valItem ident="bibl:{@xml:id}">
+          <gloss><xsl:value-of select="@n"/></gloss>
+          <desc><xsl:value-of select="."/></desc>
+        </valItem>
+      </xsl:for-each>
+    </xsl:copy>
+  </xsl:template>
+  
 <!-- Annoying things that need suppression. -->
-  <xsl:template match="@part | @default | @full | @instant | @ns | @predeclare
+  <xd:doc scope="component">
+    <xd:desc>Suppress a bunch of unwanted things that might appear as a result
+      of transformation/expansion of ODD.</xd:desc>
+  </xd:doc>
+  <xsl:template match="@part | @default | @full | @instant | @ns | @org | @predeclare
                        | @status | schemaSpec/@mode | teiHeader/@type"/>
   
   
   
-  <!-- Copy everything else as-is. -->
+  <xd:doc scope="component">
+    <xd:desc>Default identity transform.</xd:desc>
+  </xd:doc>
   <xsl:template match="@*|node()" priority="-1">
     <xsl:copy copy-namespaces="no">
       <xsl:apply-templates select="node()|@*"/>

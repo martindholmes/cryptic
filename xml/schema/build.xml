@@ -18,7 +18,8 @@
      -lib ../../utilities
   -->
   
-  <taskdef name="jing" classname="com.thaiopensource.relaxng.util.JingTask" />
+  <taskdef name="jing" classname="com.thaiopensource.relaxng.util.JingTask"
+   classpath="../../utilities/jing.jar"/>
   
   <property name="echo.separator" value="************************************************"/>
   

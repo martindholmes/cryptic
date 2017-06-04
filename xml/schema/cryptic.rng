@@ -5,7 +5,7 @@
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2017-06-04T22:07:40Z. .
+Schema generated from ODD source 2017-06-04T23:56:12Z. .
 TEI Edition: Version 3.1.0. Last updated on
 	15th December 2016, revision d3f5e70
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 3.1.0/
@@ -744,7 +744,14 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the source from which some aspect of this element is drawn.</a:documentation>
             <list>
                <oneOrMore>
-                  <data type="anyURI"/>
+                  <choice>
+                     <value>bibl:UNKNOWN</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unknown source) Item, clue or puzzle whose original source is unknown.</a:documentation>
+                     <value>bibl:macnutt_1966</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Macnutt 1966) Macnutt, D. S.. 1966. Ximenes on the art of the crossword. London, Methuen.</a:documentation>
+                     <value>bibl:xwDt_2002</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Daily Telegraph Cryptics 9 2002) Daily Telegraph. 2002. The Daily Telegraph big book of cryptic crosswords. 9. London: Pan. Setters are not identified in this collection.</a:documentation>
+                  </choice>
                </oneOrMore>
             </list>
          </attribute>
@@ -1919,6 +1926,7 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    <define name="model.milestoneLike">
       <choice>
          <ref name="lb"/>
+         <ref name="anchor"/>
       </choice>
    </define>
    <define name="model.gLike">
@@ -6800,6 +6808,16 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">associates an interpretative annotation directly with a span of text. [17.3. Spans and Interpretations]</a:documentation>
          <ref name="macro.phraseSeq.limited"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="cryptic-span-anaOnSpan-constraint-assert-9">
+            <rule context="tei:span">
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       test="if (ancestor::tei:list[@type='clues']) then @ana else (@ana or not(@ana))"
+                       role="error"> The
+              @ana attribute must always be supplied on span elements which part of clues
+              (descendants of list[@type='clues'].</assert>
+            </rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="cryptic-span-targetfrom-constraint-report-15">
             <rule context="tei:span">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@from and @target">
@@ -6830,9 +6848,46 @@ If @to is supplied on <name/>, @from must be supplied as well</report>
 The attributes @to and @from on <name/> may each contain only a single value</report>
             </rule>
          </pattern>
-         <ref name="att.global.attributes"/>
+         <ref name="att.global.attribute.xmlid"/>
+         <ref name="att.global.attribute.n"/>
+         <ref name="att.global.attribute.xmllang"/>
+         <ref name="att.global.attribute.xmlbase"/>
+         <ref name="att.global.attribute.xmlspace"/>
+         <ref name="att.global.rendition.attribute.rend"/>
+         <ref name="att.global.rendition.attribute.style"/>
+         <ref name="att.global.rendition.attribute.rendition"/>
+         <ref name="att.global.linking.attribute.corresp"/>
+         <ref name="att.global.linking.attribute.sameAs"/>
+         <ref name="att.global.linking.attribute.next"/>
+         <ref name="att.global.linking.attribute.prev"/>
+         <ref name="att.global.responsibility.attribute.cert"/>
+         <ref name="att.global.responsibility.attribute.resp"/>
+         <ref name="att.global.source.attribute.source"/>
          <ref name="att.interpLike.attributes"/>
          <ref name="att.pointing.attributes"/>
+         <optional>
+            <attribute name="ana">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(analysis) indicates one or more elements containing interpretations of the element on which the ana attribute appears.</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <choice>
+                        <value>crs:ccpUnknown</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unknown) Unknown or as-yet unspecified type of clue component.</a:documentation>
+                        <value>crs:ccpDef</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Definition) This part of the clue is the definition of the answer.</a:documentation>
+                        <value>crs:ccpForm</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Form) This part of the clue contains instructions for building the answer.</a:documentation>
+                        <value>crs:ccpSignal</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Signal) This is a component of the clue that signals how the clue is to be interpreted; this would include for instance mixed suggesting an anagram, or within suggesting Words in words.</a:documentation>
+                        <value>crs:ccpMisdirection</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Misdirection) This is a component of the clue that is constructed such that it will lead the solver to misinterpret the clue or confuse its components. This might be a phrase that hangs together as a semantic unit, but in the solution breakdown, would actually be fragmented.</a:documentation>
+                        <value>crs:ccpLength</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Length) This component of the clue, usually parenthesized, specifies the length(s) of the solution word(s).</a:documentation>
+                     </choice>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
          <optional>
             <attribute name="from">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">gives the identifier of the node which is the starting point of the span of text being annotated; if not accompanied by a to attribute, gives the identifier of the node of the entire span of text being annotated.</a:documentation>
@@ -6942,7 +6997,7 @@ The attributes @to and @from on <name/> may each contain only a single value</re
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="cryptic-link-linkTargets3-constraint-assert-9">
+                  id="cryptic-link-linkTargets3-constraint-assert-10">
             <rule context="tei:link">
                <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -7001,12 +7056,21 @@ The attributes @to and @from on <name/> may each contain only a single value</re
          <empty/>
       </element>
    </define>
+   <define name="anchor">
+      <element name="anchor">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(anchor point) attaches an identifier to a point within a text, whether or not it corresponds with a textual element. [8.4.2. Synchronization and Overlap 16.5. Correspondence and Alignment]</a:documentation>
+         <empty/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="seg">
       <element name="seg">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(arbitrary segment) represents any segmentation of text below the chunk level. [16.3. Blocks, Segments, and Anchors 6.2. Components of the Verse Line 7.2.5. Speech Contents]</a:documentation>
          <ref name="macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="cryptic-seg-anaOnSeg-constraint-assert-10">
+                  id="cryptic-seg-anaOnSeg-constraint-assert-11">
             <rule context="tei:seg">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        test="if (ancestor::tei:list[@type='clues']) then @ana else not(@ana)"
@@ -7048,6 +7112,10 @@ The attributes @to and @from on <name/> may each contain only a single value</re
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Form) This part of the clue contains instructions for building the answer.</a:documentation>
                         <value>crs:ccpSignal</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Signal) This is a component of the clue that signals how the clue is to be interpreted; this would include for instance mixed suggesting an anagram, or within suggesting Words in words.</a:documentation>
+                        <value>crs:ccpMisdirection</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Misdirection) This is a component of the clue that is constructed such that it will lead the solver to misinterpret the clue or confuse its components. This might be a phrase that hangs together as a semantic unit, but in the solution breakdown, would actually be fragmented.</a:documentation>
+                        <value>crs:ccpLength</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Length) This component of the clue, usually parenthesized, specifies the length(s) of the solution word(s).</a:documentation>
                      </choice>
                   </oneOrMore>
                </list>

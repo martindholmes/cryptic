@@ -22,8 +22,8 @@
   <text>
       <body>
          <listBibl>
-           <bibl xml:id="macnutt_1966"><author><name>Macnutt, D. S.</name></author>. <date when="1966">1966</date>. <title level="m">Ximenes on the art of the crossword</title>. <pubPlace>London</pubPlace>, <publisher>Methuen</publisher>.</bibl>
-           <bibl xml:id="xwDt_2002"><author>Daily Telegraph</author>. <date when="2002">2002</date>. <title level="m">The Daily Telegraph big book of cryptic crosswords</title>. <biblScope unit="vol">9</biblScope>. <pubPlace>London</pubPlace>: <publisher>Pan</publisher>. </bibl>
+           <bibl xml:id="macnutt_1966" n="Macnutt 1966"><author><name>Macnutt, D. S.</name></author>. <date when="1966">1966</date>. <title level="m">Ximenes on the art of the crossword</title>. <pubPlace>London</pubPlace>, <publisher>Methuen</publisher>.</bibl>
+           <bibl xml:id="xwDt_2002" n="Daily Telegraph Cryptics 9 2002"><author>Daily Telegraph</author>. <date when="2002">2002</date>. <title level="m">The Daily Telegraph big book of cryptic crosswords</title>. <biblScope unit="vol">9</biblScope>. <pubPlace>London</pubPlace>: <publisher>Pan</publisher>. <note>Setters are not identified in this collection.</note></bibl>
          </listBibl>
       </body>
   </text>

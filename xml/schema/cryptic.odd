@@ -125,6 +125,18 @@
               an <ref target="#ctpAnagram">anagram</ref>, or <q>within</q> suggesting 
               <ref target="#ctpWordsInWords">Words in words</ref>.</desc>
           </category>
+          <category xml:id="ccpMisdirection">
+            <gloss>Misdirection</gloss>
+            <desc>This is a component of the clue that is constructed such that it 
+            will lead the solver to misinterpret the clue or confuse its components.
+            This might be a phrase that hangs together as a semantic unit, but in 
+            the solution breakdown, would actually be fragmented.</desc>
+          </category>
+          <category xml:id="ccpLength">
+            <gloss>Length</gloss>
+            <desc>This component of the clue, usually parenthesized, specifies the
+            length(s) of the solution word(s).</desc>
+          </category>
         </taxonomy>
       </classDecl>
     </encodingDesc>
@@ -145,7 +157,7 @@
         <moduleRef key="gaiji"
           include="char charDecl charName charProp g glyph glyphName mapping unicodeName value"/>
         <moduleRef key="analysis"/>
-        <moduleRef key="linking" include="ab link linkGrp seg"/>
+        <moduleRef key="linking" include="ab anchor link linkGrp seg"/>
 
         <classSpec ident="att.global.linking"
           module="linking"
@@ -156,6 +168,16 @@
             <attDef ident="copyOf" mode="delete"/>
             <attDef ident="exclude" mode="delete"/>
             <attDef ident="select" mode="delete"/>
+          </attList>
+        </classSpec>
+        
+<!--      @source must always be used to point at items in the bibliography.  -->
+        <classSpec type="atts" ident="att.global.source" module="tei" mode="change">
+          <attList>
+            <attDef ident="source" mode="change">
+              <valList mode="add" type="closed">
+              </valList>
+            </attDef>
           </attList>
         </classSpec>
 
@@ -182,6 +204,18 @@
             </constraint>
           </constraintSpec>
         </elementSpec>
+      
+      <elementSpec ident="span" module="linking" mode="change">
+        <constraintSpec ident="anaOnSpan" scheme="isoschematron" mode="add">
+          <constraint>
+            <assert xmlns="http://purl.oclc.org/dsdl/schematron"
+              test="if (ancestor::tei:list[@type='clues']) then @ana else (@ana or not(@ana))" role="error"> The
+              @ana attribute must always be supplied on span elements which part of clues
+              (descendants of list[@type='clues'].</assert>
+          </constraint>
+        </constraintSpec>
+      </elementSpec>
+        
       </schemaSpec>
 
 

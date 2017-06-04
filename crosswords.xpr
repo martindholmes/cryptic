@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="17.1">
+<project version="19.0">
     <meta>
         <filters directoryPatterns="" filePatterns="" positiveFilePatterns="" showHiddenFiles="false"/>
         <options>
-            <serialized version="17.1" xml:space="preserve">
-                <map>
+            <serialized version="19.0" xml:space="preserve">
+                <serializableOrderedMap>
                     <entry>
                         <String>editor.detect.indent.on.open</String>
                         <Boolean>false</Boolean>
@@ -28,6 +28,21 @@
                     <entry>
                         <String>scenario.associations</String>
                         <scenarioAssociation-array>
+                            <scenarioAssociation>
+                                <field name="url">
+                                    <String>xml/schema/temp.odd</String>
+                                </field>
+                                <field name="scenarioIds">
+                                    <list>
+                                        <String>TEI ODD to RelaxNG XML Output to same folder</String>
+                                    </list>
+                                </field>
+                                <field name="scenarioTypes">
+                                    <list>
+                                        <String>ANT</String>
+                                    </list>
+                                </field>
+                            </scenarioAssociation>
                             <scenarioAssociation>
                                 <field name="url">
                                     <String>xml/schema/cryptic.odd</String>
@@ -55,21 +70,6 @@
                                 <field name="scenarioTypes">
                                     <list>
                                         <String>XSL</String>
-                                    </list>
-                                </field>
-                            </scenarioAssociation>
-                            <scenarioAssociation>
-                                <field name="url">
-                                    <String>xml/schema/temp.odd</String>
-                                </field>
-                                <field name="scenarioIds">
-                                    <list>
-                                        <String>TEI ODD to RelaxNG XML Output to same folder</String>
-                                    </list>
-                                </field>
-                                <field name="scenarioTypes">
-                                    <list>
-                                        <String>ANT</String>
                                     </list>
                                 </field>
                             </scenarioAssociation>
@@ -152,7 +152,29 @@
                                     <Boolean>true</Boolean>
                                 </field>
                                 <field name="xsltParams">
-                                    <list/>
+                                    <list>
+                                        <transformationParameter>
+                                            <field name="paramDescription">
+                                                <paramDescriptor>
+                                                    <field name="localName">
+                                                        <String>lib</String>
+                                                    </field>
+                                                    <field name="prefix">
+                                                        <null/>
+                                                    </field>
+                                                    <field name="namespace">
+                                                        <null/>
+                                                    </field>
+                                                </paramDescriptor>
+                                            </field>
+                                            <field name="value">
+                                                <String>../../utilities</String>
+                                            </field>
+                                            <field name="hasXPathValue">
+                                                <Boolean>false</Boolean>
+                                            </field>
+                                        </transformationParameter>
+                                    </list>
                                 </field>
                                 <field name="cascadingStylesheets">
                                     <String-array/>
@@ -172,7 +194,7 @@
                                     <String></String>
                                 </field>
                                 <field name="buildFilePath">
-                                    <String>${frameworksDir}/tei/xml/tei/stylesheet/relaxng/build-to.xml</String>
+                                    <String>${frameworkDir(TEI P5)}/xml/tei/stylesheet/relaxng/build-to.xml</String>
                                 </field>
                                 <field name="ditaParams">
                                     <list>
@@ -195,6 +217,9 @@
                                             <field name="possibleValues">
                                                 <null/>
                                             </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <null/>
+                                            </field>
                                         </antParameter>
                                         <antParameter>
                                             <field name="name">
@@ -213,6 +238,9 @@
                                                 <Integer>5</Integer>
                                             </field>
                                             <field name="possibleValues">
+                                                <null/>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
                                                 <null/>
                                             </field>
                                         </antParameter>
@@ -235,6 +263,9 @@
                                             <field name="possibleValues">
                                                 <null/>
                                             </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <null/>
+                                            </field>
                                         </antParameter>
                                         <antParameter>
                                             <field name="name">
@@ -253,6 +284,9 @@
                                                 <Integer>5</Integer>
                                             </field>
                                             <field name="possibleValues">
+                                                <null/>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
                                                 <null/>
                                             </field>
                                         </antParameter>
@@ -275,6 +309,9 @@
                                             <field name="possibleValues">
                                                 <null/>
                                             </field>
+                                            <field name="possibleValuesDescriptions">
+                                                <null/>
+                                            </field>
                                         </antParameter>
                                         <antParameter>
                                             <field name="name">
@@ -293,6 +330,9 @@
                                                 <Integer>5</Integer>
                                             </field>
                                             <field name="possibleValues">
+                                                <null/>
+                                            </field>
+                                            <field name="possibleValuesDescriptions">
                                                 <null/>
                                             </field>
                                         </antParameter>
@@ -403,9 +443,6 @@
                                 <field name="extensionURLs">
                                     <String-array>
                                         <String>${oxygenHome}/classes/</String>
-                                        <String>${oxygenHome}/lib/oxygen.jar</String>
-                                        <String>${oxygenHome}/lib/oxygenAuthor.jar</String>
-                                        <String>${oxygenHome}/lib/oxygenDeveloper.jar</String>
                                         <String>${oxygenHome}/lib/oxygenEclipse.jar</String>
                                         <String>${oxygenHome}/lib/oxygenAuthorEclipse.jar</String>
                                         <String>${oxygenHome}/lib/oxygenDeveloperEclipse.jar</String>
@@ -420,7 +457,7 @@
                             </antScenario>
                         </scenario-array>
                     </entry>
-                </map>
+                </serializableOrderedMap>
             </serialized>
         </options>
     </meta>
