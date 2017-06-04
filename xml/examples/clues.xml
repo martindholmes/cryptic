@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../schema/cryptic.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="../schema/cryptic.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="clues">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>Example clue encodings</title>
+        <editor><persName>Martin Holmes</persName></editor>
+      </titleStmt>
+      <publicationStmt>
+        <p>Encoding and annotations free for any purpose; original clues remain
+        the property of their authors, and are used as representative samples 
+        or quotations for illustrative purposes.</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>This is a born-digital file; individual encoded example clues have
+        their own sources identified in the bibliography.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <body>
+    <head>
+      Example clue encodings
+    </head>
+    
+  </body>
+</TEI>

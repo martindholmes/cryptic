@@ -19,24 +19,87 @@
     <encodingDesc>
       <classDecl>
         <taxonomy xml:id="clueTypes">
-          <!-- NOTE: We currently cannot have both <desc> and <category> in <taxonomy>. 
-           This seems wrong; issue https://github.com/TEIC/TEI/issues/1415
-           addresses this. -->
-          <!--<desc>This taxonomy enumerates the range of types of clue which 
+          <desc>This taxonomy enumerates the range of types of clue which 
               appear in the corpus. This taxonomy is processed to create a set 
-              of values for the @ana attribute on <gi>item</gi>.</desc>-->
+              of values for the @ana attribute on <gi>item</gi>. More than 
+              one type may be assigned to a single clue. Most types, at least 
+              initially, are derived from Ximenes Chapters VI and VII.
+          </desc>
           
           <category xml:id="ctpUnknown">
             <gloss>Unknown</gloss>
             <desc>Unknown or as-yet unspecified form of clue.</desc>
           </category>
-          <category xml:id="ctpAnagram">
-            <gloss>Anagram</gloss>
-            <desc>A clue whose form component consists of an anagram.</desc>
+          
+          <category xml:id="ctpSynonym">
+            <gloss>Synonyms (Xim type 6.1: one or more meanings)</gloss>
+            <desc>A clue whose contents provide at least two different
+                  meanings of the target term.</desc>
+          </category>
+          <category xml:id="ctpReversal">
+            <gloss>Reversals (Xim type 6.2: reversal)</gloss>
+            <desc>Defined words are reversed in order to generate the 
+                  answer.</desc>
           </category>
           <category xml:id="ctpCharade">
-            <gloss>Charade</gloss>
+            <gloss>Charade (Xim type 6.3: charade)</gloss>
             <desc>A clue whose form component consists a series of individual clued words.</desc>
+          </category>
+          <category xml:id="ctpContainerContents">
+            <gloss>Container and contents (Xim type 6.4: container and contents)</gloss>
+            <desc>A clue whose constructor component involves putting some elements
+              inside other elements.</desc>
+          </category>
+          <category xml:id="ctpPun">
+            <gloss>Pun (Xim type 6.5: pun)</gloss>
+            <desc>A clue whose constructor involves a sound-alike hint.</desc>
+          </category>
+          <category xml:id="ctpAnagram">
+            <gloss>Anagram (Xim type 6.6: anagram)</gloss>
+            <desc>A clue whose constructor component involves an anagram of
+              one or more components.</desc>
+          </category>
+          <category xml:id="ctpHeadsTails">
+            <gloss>Heads and tails (Xim type 7.1 Heads and tails)</gloss>
+            <desc>A clue whose constructor involves removing the leading or
+                  trailing letter(s) from a component.</desc>
+          </category>
+          <category xml:id="ctpSpeechPeculiarities">
+            <gloss>Speech peculiarities (Xim type 7.2 Peculiarities of speech)</gloss>
+            <desc>A clue whose constructor invokes a dialectal pronunciation such as 
+            dropped h, or pathological feature such as lisping.</desc>
+          </category>
+          <category xml:id="ctpWordsInWords">
+            <gloss>Words in words (Xim type 7.3 Words treated as parts of other words)</gloss>
+            <desc>A clue whose constructor results in a term which must be truncated in some
+              way to reveal the true answer.</desc>
+          </category>
+          <category xml:id="ctpInitialOrFinal">
+            <gloss>Initial or final letters (Xim type 7.4 Initial or final letters)</gloss>
+            <desc>A clue whose constructor makes use of the initial or final letters of 
+              a phrase (one kind of reverse version of <ref target="#ctpHeadsTails">Heads and tails</ref>).</desc>
+          </category>
+          <category xml:id="ctpForeign">
+            <gloss>Foreign languages (Xim type 7.5 Foreign languages)</gloss>
+            <desc>A clue whose constructor invokes words from other languages.</desc>
+          </category>
+          <category xml:id="ctpLiterary">
+            <gloss>Literary references (Xim type 7.6 Literary references etc.</gloss>
+            <desc>A clue whose constructor includes a quotation or refers to a literary
+              text.</desc>
+          </category>
+          <category xml:id="ctpOutsides">
+            <gloss>Outsides (Xim type 7.7 Outsides</gloss>
+            <desc>A clue whose constructor requires the removal of the interior of a 
+            word or phrase. This is a special case of 
+              <ref target="#ctpInitialOrFinal">Initial or final</ref>.</desc>
+          </category>
+          <category xml:id="ctpUnclassified">
+            <gloss>Unclassified (Xim type 7.8 Various)</gloss>
+            <desc>Ximenes provides several examples of clues not fitting into other 
+            categories here; many use question marks or exclamation marks as a signal
+            that they are pushing the boundaries of sense or invoking non-existent 
+            terms.</desc>
           </category>
         </taxonomy>
         <taxonomy xml:id="clueComponents">
@@ -54,6 +117,13 @@
           <category xml:id="ccpForm">
             <gloss>Form</gloss>
             <desc>This part of the clue contains instructions for building the answer.</desc>
+          </category>
+          <category xml:id="ccpSignal">
+            <gloss>Signal</gloss>
+            <desc>This is a component of the clue that signals how the clue is to be 
+              interpreted; this would include for instance <q>mixed</q> suggesting
+              an <ref target="#ctpAnagram">anagram</ref>, or <q>within</q> suggesting 
+              <ref target="#ctpWordsInWords">Words in words</ref>.</desc>
           </category>
         </taxonomy>
       </classDecl>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="schema/cryptic.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="schema/cryptic.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:id="bibl">
+  <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Cryptic Crossword Encoding Project Bibliography</title>
+           <respStmt>
+             <resp>Compiler</resp>
+             <persName>Martin Holmes</persName>
+           </respStmt>
+         </titleStmt>
+         <publicationStmt>
+            <p>Free for any purpose.</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>This is the main project bibliography.</p>
+         </sourceDesc>
+      </fileDesc>
+  </teiHeader>
+  <text>
+      <body>
+         <listBibl>
+           <bibl xml:id="macnutt_1966"><author><name>Macnutt, D. S.</name></author>. <date when="1966">1966</date>. <title level="m">Ximenes on the art of the crossword</title>. <pubPlace>London</pubPlace>, <publisher>Methuen</publisher>.</bibl>
+           <bibl xml:id="xwDt_2002"><author>Daily Telegraph</author>. <date when="2002">2002</date>. <title level="m">The Daily Telegraph big book of cryptic crosswords</title>. <biblScope unit="vol">9</biblScope>. <pubPlace>London</pubPlace>: <publisher>Pan</publisher>. </bibl>
+         </listBibl>
+      </body>
+  </text>
+</TEI>
