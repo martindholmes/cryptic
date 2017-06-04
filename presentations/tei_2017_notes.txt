@@ -1,0 +1,18 @@
+Notes for TEI 2017 presentation
+
+Clues for analysis/exemplification:
+
+1. Guard dog kept within sight (6) [Telegraph book]
+    Ximenean type 4: Container and Contents.
+    Definition:   Guard
+    Construction: dog kept within sight
+    Container:    sight = see
+    Contents:     dog = cur
+    Signal word:  within
+    Interesting component: "Guard dog" is the misleading factor, and it 
+                            misleads by virtue of being a phrase which 
+                            spans the definition and construction. This 
+                            is an OVERLAPPING HIERARCHY functioning in 
+                            the mind of the solver.
+    
+
