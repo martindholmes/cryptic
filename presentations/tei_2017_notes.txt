@@ -1,13 +1,10 @@
 Notes for TEI 2017 presentation
 
-Ximenean types:
-
-1. 
 
 Clues for analysis/exemplification:
 
-1. Guard dog kept within sight (6) [Telegraph book]
-    Ximenean type 4: Container and Contents.
+1. Guard dog kept within sight (6) [Telegraph book]: secure
+    Ximenean type 6.4: Container and Contents.
     Definition:   Guard
     Construction: dog kept within sight
     Container:    sight = see
@@ -19,4 +16,64 @@ Clues for analysis/exemplification:
                             is an OVERLAPPING HIERARCHY functioning in 
                             the mind of the solver.
     
+2. Four card players wrapping party gifts (6) [Guardian 27,192]: endows
+    Ximenean type 6.4: Container and Contents.
+    Definition:   gifts
+    Construction: Four card players wrapping party
+    Container:    four card players = enws
+    Contents:     party = do
+    Signal word:  wrapping
+    Interesting component: Overlapping hierarchy again: "party gifts".
+                           Also misleading is the part of speech of 
+                           "gifts", noun in the full clue, verb as 
+                           the definition.
 
+3. Switch for sale (2, 5) [Araucaria clue posted by a fan:
+                           https://www.theguardian.com/discussion/p/3kkpp]: 
+                           on offer
+    Ximenean type 6.5: Pun; possibly 6.1, One or more meanings.
+    Definition:   for sale
+    Pun:          switch (an alternative indirect definition)
+    Interesting component: The genius here is brevity.
+
+4. Furious about Peruvian ancestry (11) [Araucaria clue posted by a fan:
+                           https://www.theguardian.com/discussion/p/3kkpp]: 
+                           incandescent
+    Ximenean type 6.3: Charade.
+    Definition:   furious (metaphoric meaning)
+    Construction: Peruvian = Incan, ancestry = descent
+
+5. ! (1, 6, 1, 4) [Araucaria clue posted by a fan:
+                           https://www.theguardian.com/discussion/p/3kkpp]: 
+                           I haven't a clue
+    Ximenean type 7.8: Unclassified
+    Interesting component: Arguably this is a pun, but it's sort of a meta-clue
+                           which acknowledges it's in the realm of the crossword.
+
+Points for presentation:
+
+USE: 
+
+Mixomatosis (Larkin):
+
+Caught in the centre of a soundless field
+While hot inexplicable hours go by
+What trap is this? Where were its teeth concealed?
+You seem to ask.
+
+                 I make a sharp reply,
+Then clean my stick. I’m glad I can’t explain
+Just in what jaws you were to supperate:
+You may have thought things would come right again
+If you could only keep quite still and wait.
+
+Focus on "I make a sharp reply / Then clean my stick." On first reading,
+the reader stumbles over this divided line -- what is the reply, what is
+the stick? The stick is of course a gun, and the reply a euthanistic shot;
+the purpose of the puzzlement is perhaps to give us a half-blind rabbit's
+uncomprehending view of the event. The real meaning of the reply metaphor
+is obscured partly by the coherence of the phrase "sharp reply". The 
+reader, in unmasking the metaphor, experiences a moment of pleasurable
+realization or recognition which is very similar to the sensation we 
+experience as crossword solvers, untangling a clever clue. 
+ 

@@ -94,6 +94,15 @@
             word or phrase. This is a special case of 
               <ref target="#ctpInitialOrFinal">Initial or final</ref>.</desc>
           </category>
+          <category xml:id="ctpEmbodiment">
+            <gloss>Embodiment (non-Ximenean)</gloss>
+            <desc>A clue type that would probably have fallen into the "unclassified" category
+              for Macnutt, but which is a distinct type of its own, often used by Araucaria.
+              In this clue type, the entire clue embodies or exemplifies its answer; describing
+              what is happening in the clue provides the answer. Examples from Araucaria include
+              GEGS (scrambled eggs), Cox at me (income tax), and Of of of of of of of of of of
+              (oftentimes). </desc>
+          </category>
           <category xml:id="ctpUnclassified">
             <gloss>Unclassified (Xim type 7.8 Various)</gloss>
             <desc>Ximenes provides several examples of clues not fitting into other 
