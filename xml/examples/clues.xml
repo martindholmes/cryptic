@@ -26,12 +26,20 @@
         
         <item ana="crs:ctpWordsInWords" n="secure" source="bibl:xwDt_2002">
           <anchor xml:id="item_001_1"/><seg ana="crs:ccpDef">Guard</seg> <seg ana="crs:ccpForm">dog<anchor xml:id="item_001_2"/> <seg ana="crs:ccpSignal">kept within</seg> sight</seg> <seg ana="crs:ccpLength">(6)</seg>
-          <span ana="crs:ccpMisdirection" from="#item_001_1" to="#item_001_2">The phrase "guard dog" crosses the 
+          <span ana="crs:ccpMisdirection" from="#item_001_1" to="#item_001_2">The phrase <mentioned>guard dog</mentioned> crosses the 
           definition/form boundary.</span>
         </item>
         
         <item ana="crs:ctpUnclassified" n="scrambled eggs" source="bibl:UNKNOWN">
           <seg ana="crs:ccpDef crs:ccpForm">Gegs</seg>
+        </item>
+        
+        <item ana="crs:ctpContainerContents" n="endows">
+          <seg ana="crs:ccpForm">Four card players <seg ana="crs:ccpSignal">wrapping</seg> <anchor xml:id="item_003_1"/>party</seg> <seg ana="crs:ccpDef" xml:id="item_003_2">gifts<anchor xml:id="item_003_3"/></seg> (6)
+          <span ana="crs:ccpMisdirection" from="#item_003_1" to="#item_003_3">The phrase <mentioned>party gifts</mentioned> crosses the 
+            definition/form boundary.</span>
+          <span ana="crs:ccpMisdirection" from="#item_003_2" to="#item_003_3">The definition <mentioned>gifts</mentioned> is a noun in the 
+            context of the complete clue, but needs to be read as a verb to function as the definition.</span>
         </item>
       </list>
     </body>
