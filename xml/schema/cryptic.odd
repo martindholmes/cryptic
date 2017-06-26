@@ -130,8 +130,8 @@
           <category xml:id="ccpSignal">
             <gloss>Signal</gloss>
             <desc>This is a component of the clue that signals how the clue is to be 
-              interpreted; this would include for instance <q>mixed</q> suggesting
-              an <ref target="#ctpAnagram">anagram</ref>, or <q>within</q> suggesting 
+              interpreted; this would include for instance <mentioned>mixed</mentioned> suggesting
+              an <ref target="#ctpAnagram">anagram</ref>, or <mentioned>within</mentioned> suggesting 
               <ref target="#ctpWordsInWords">Words in words</ref>.</desc>
           </category>
           <category xml:id="ccpMisdirection">
@@ -140,6 +140,15 @@
             will lead the solver to misinterpret the clue or confuse its components.
             This might be a phrase that hangs together as a semantic unit, but in 
             the solution breakdown, would actually be fragmented.</desc>
+          </category>
+          <category xml:id="ccpConvention">
+            <gloss>Convention</gloss>
+            <desc>This is a component of the clue that depends on a word or phrase 
+              which is commonly used to suggest an answer component. For example,
+              <mentioned>about</mentioned> = <mentioned>circa</mentioned> = <mentioned>c</mentioned>;
+              <mentioned>worker</mentioned> = <mentioned>ant</mentioned> or <mentioned>bee</mentioned>;
+              <mentioned>point</mentioned> = <mentioned>compass point</mentioned> = <mentioned>N</mentioned>,
+              <mentioned>S</mentioned>, <mentioned>E</mentioned> or <mentioned>W</mentioned>.</desc>
           </category>
           <category xml:id="ccpLength">
             <gloss>Length</gloss>
@@ -155,7 +164,7 @@
       <schemaSpec ident="cryptic">
         <moduleRef key="tei"/>
         <moduleRef key="core"
-          include="abbr author bibl biblScope choice cit corr date desc editor email emph expan foreign gloss graphic head hi item l lb lb list listBibl measure mentioned name note num orig p ptr pubPlace publisher q quote ref reg resp respStmt rs said series sic soCalled teiCorpus term title unclear"/>
+          include="abbr author bibl biblScope choice cit corr date desc editor email emph expan foreign gloss graphic head hi item l label lb list listBibl measure mentioned name note num orig p ptr pubPlace publisher q quote ref reg resp respStmt rs said series sic soCalled teiCorpus term title unclear"/>
         <moduleRef key="header"
           include="abstract appInfo application authority availability catDesc catRef category change correction creation distributor edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage language licence listChange listPrefixDef normalization prefixDef principal profileDesc projectDesc publicationStmt punctuation quotation rendition revisionDesc samplingDecl sourceDesc sponsor styleDefDecl taxonomy teiHeader titleStmt xenoData"/>
         <moduleRef key="textstructure"

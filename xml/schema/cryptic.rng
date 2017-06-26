@@ -5,7 +5,7 @@
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2017-06-04T23:56:12Z. .
+Schema generated from ODD source 2017-06-26T21:01:37Z. .
 TEI Edition: Version 3.1.0. Last updated on
 	15th December 2016, revision d3f5e70
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 3.1.0/
@@ -751,6 +751,8 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Macnutt 1966) Macnutt, D. S.. 1966. Ximenes on the art of the crossword. London, Methuen.</a:documentation>
                      <value>bibl:xwDt_2002</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Daily Telegraph Cryptics 9 2002) Daily Telegraph. 2002. The Daily Telegraph big book of cryptic crosswords. 9. London: Pan. Setters are not identified in this collection.</a:documentation>
+                     <value>bibl:xwGd_27192</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Guardian Crossword 27,192) Picaroon. 2017. Guardian Crossword No. 27,192.</a:documentation>
                   </choice>
                </oneOrMore>
             </list>
@@ -2029,29 +2031,41 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    <define name="model.labelLike">
       <choice>
          <ref name="desc"/>
+         <ref name="label"/>
       </choice>
    </define>
    <define name="model.labelLike_alternation">
       <choice>
          <ref name="desc"/>
+         <ref name="label"/>
       </choice>
    </define>
    <define name="model.labelLike_sequence">
       <ref name="desc"/>
+      <ref name="label"/>
    </define>
    <define name="model.labelLike_sequenceOptional">
       <optional>
          <ref name="desc"/>
+      </optional>
+      <optional>
+         <ref name="label"/>
       </optional>
    </define>
    <define name="model.labelLike_sequenceOptionalRepeatable">
       <zeroOrMore>
          <ref name="desc"/>
       </zeroOrMore>
+      <zeroOrMore>
+         <ref name="label"/>
+      </zeroOrMore>
    </define>
    <define name="model.labelLike_sequenceRepeatable">
       <oneOrMore>
          <ref name="desc"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="label"/>
       </oneOrMore>
    </define>
    <define name="model.listLike">
@@ -3382,7 +3396,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
           
                   <oneOrMore>
                      <group>
-            
+                        <ref name="label"/>
             
                         <zeroOrMore>
                            <ref name="model.global"/>
@@ -3513,6 +3527,8 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Literary references (Xim type 7.6 Literary references etc.) A clue whose constructor includes a quotation or refers to a literary text.</a:documentation>
                         <value>crs:ctpOutsides</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Outsides (Xim type 7.7 Outsides) A clue whose constructor requires the removal of the interior of a word or phrase. This is a special case of Initial or final.</a:documentation>
+                        <value>crs:ctpEmbodiment</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Embodiment (non-Ximenean)) A clue type that would probably have fallen into the "unclassified" category for Macnutt, but which is a distinct type of its own, often used by Araucaria. In this clue type, the entire clue embodies or exemplifies its answer; describing what is happening in the clue provides the answer. Examples from Araucaria include GEGS (scrambled eggs), Cox at me (income tax), and Of of of of of of of of of of (oftentimes). </a:documentation>
                         <value>crs:ctpUnclassified</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unclassified (Xim type 7.8 Various)) Ximenes provides several examples of clues not fitting into other categories here; many use question marks or exclamation marks as a signal that they are pushing the boundaries of sense or invoking non-existent terms.</a:documentation>
                      </choice>
@@ -3520,6 +3536,17 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
                </list>
             </attribute>
          </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="label">
+      <element name="label">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. Lists]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <ref name="att.placement.attributes"/>
+         <ref name="att.written.attributes"/>
          <empty/>
       </element>
    </define>
@@ -7127,6 +7154,7 @@ The attributes @to and @from on <name/> may each contain only a single value</re
    <start>
       <choice>
          <ref name="TEI"/>
+         <ref name="teiCorpus"/>
       </choice>
    </start>
 </grammar>
