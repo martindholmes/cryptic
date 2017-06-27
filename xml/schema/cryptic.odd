@@ -103,6 +103,16 @@
               GEGS (scrambled eggs), Cox at me (income tax), and Of of of of of of of of of of
               (oftentimes). </desc>
           </category>
+          <category xml:id="ctpCrossReference">
+            <gloss>Cross-reference to another clue/answer (non-Ximenean)</gloss>
+            <desc>A clue which cross-references another clue or the answer to another clue.</desc>
+          </category>
+          <category xml:id="ctpAndLit">
+            <gloss>&amp; Lit. (Xim type 8 &amp; Lit.)</gloss>
+            <desc>A clue which, in addition to providing a constructor, forms in its entirety
+              a definition of the target word. This type of clue is of necessity combined with
+              other types; the key factor is that the definition encompasses the whole clue.</desc>
+          </category>
           <category xml:id="ctpUnclassified">
             <gloss>Unclassified (Xim type 7.8 Various)</gloss>
             <desc>Ximenes provides several examples of clues not fitting into other 

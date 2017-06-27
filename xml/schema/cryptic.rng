@@ -5,7 +5,7 @@
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2017-06-26T21:01:37Z. .
+Schema generated from ODD source 2017-06-27T00:01:35Z. .
 TEI Edition: Version 3.1.0. Last updated on
 	15th December 2016, revision d3f5e70
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 3.1.0/
@@ -3529,6 +3529,10 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Outsides (Xim type 7.7 Outsides) A clue whose constructor requires the removal of the interior of a word or phrase. This is a special case of Initial or final.</a:documentation>
                         <value>crs:ctpEmbodiment</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Embodiment (non-Ximenean)) A clue type that would probably have fallen into the "unclassified" category for Macnutt, but which is a distinct type of its own, often used by Araucaria. In this clue type, the entire clue embodies or exemplifies its answer; describing what is happening in the clue provides the answer. Examples from Araucaria include GEGS (scrambled eggs), Cox at me (income tax), and Of of of of of of of of of of (oftentimes). </a:documentation>
+                        <value>crs:ctpCrossReference</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Cross-reference to another clue/answer (non-Ximenean)) A clue which cross-references another clue or the answer to another clue.</a:documentation>
+                        <value>crs:ctpAndLit</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(&amp; Lit. (Xim type 8 &amp; Lit.)) A clue which, in addition to providing a constructor, forms in its entirety a definition of the target word. This type of clue is of necessity combined with other types; the key factor is that the definition encompasses the whole clue.</a:documentation>
                         <value>crs:ctpUnclassified</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Unclassified (Xim type 7.8 Various)) Ximenes provides several examples of clues not fitting into other categories here; many use question marks or exclamation marks as a signal that they are pushing the boundaries of sense or invoking non-existent terms.</a:documentation>
                      </choice>
@@ -6908,6 +6912,8 @@ The attributes @to and @from on <name/> may each contain only a single value</re
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Signal) This is a component of the clue that signals how the clue is to be interpreted; this would include for instance mixed suggesting an anagram, or within suggesting Words in words.</a:documentation>
                         <value>crs:ccpMisdirection</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Misdirection) This is a component of the clue that is constructed such that it will lead the solver to misinterpret the clue or confuse its components. This might be a phrase that hangs together as a semantic unit, but in the solution breakdown, would actually be fragmented.</a:documentation>
+                        <value>crs:ccpConvention</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Convention) This is a component of the clue that depends on a word or phrase which is commonly used to suggest an answer component. For example, about = circa = c; worker = ant or bee; point = compass point = N, S, E or W.</a:documentation>
                         <value>crs:ccpLength</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Length) This component of the clue, usually parenthesized, specifies the length(s) of the solution word(s).</a:documentation>
                      </choice>
@@ -7141,6 +7147,8 @@ The attributes @to and @from on <name/> may each contain only a single value</re
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Signal) This is a component of the clue that signals how the clue is to be interpreted; this would include for instance mixed suggesting an anagram, or within suggesting Words in words.</a:documentation>
                         <value>crs:ccpMisdirection</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Misdirection) This is a component of the clue that is constructed such that it will lead the solver to misinterpret the clue or confuse its components. This might be a phrase that hangs together as a semantic unit, but in the solution breakdown, would actually be fragmented.</a:documentation>
+                        <value>crs:ccpConvention</value>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Convention) This is a component of the clue that depends on a word or phrase which is commonly used to suggest an answer component. For example, about = circa = c; worker = ant or bee; point = compass point = N, S, E or W.</a:documentation>
                         <value>crs:ccpLength</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Length) This component of the clue, usually parenthesized, specifies the length(s) of the solution word(s).</a:documentation>
                      </choice>
