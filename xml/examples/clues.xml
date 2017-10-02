@@ -44,6 +44,11 @@
           <span ana="crs:ccpMisdirection" from="#item_003_2" to="#item_003_3">The definition <mentioned>gifts</mentioned> is a noun in the 
             context of the complete clue, but needs to be read as a verb to function as the definition.</span>
         </item>
+        
+        <label>DINNER</label>
+        <item ana="crs:ctpContainerContents">
+          <seg ana="crs:ccpForm"><seg ana="crs:ccpConvention">Revolutionary</seg> <seg ana="crs:ccpSignal">coming back</seg> <seg ana="crs:ccpSignal">to eat</seg> pub</seg> <seg ana="crs:ccpDef">grub</seg> <seg ana="crs:ccpLength">(6)</seg>
+        </item>
       </list>
     </body>
   </text>

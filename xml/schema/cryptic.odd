@@ -154,8 +154,10 @@
           <category xml:id="ccpConvention">
             <gloss>Convention</gloss>
             <desc>This is a component of the clue that depends on a word or phrase 
-              which is commonly used to suggest an answer component. For example,
+              which is commonly used to suggest an answer component. Such components
+              are often fossilized clichés. For example,
               <mentioned>about</mentioned> = <mentioned>circa</mentioned> = <mentioned>c</mentioned>;
+              <mentioned>revolutionary</mentioned> = <mentioned>red</mentioned>;
               <mentioned>worker</mentioned> = <mentioned>ant</mentioned> or <mentioned>bee</mentioned>;
               <mentioned>point</mentioned> = <mentioned>compass point</mentioned> = <mentioned>N</mentioned>,
               <mentioned>S</mentioned>, <mentioned>E</mentioned> or <mentioned>W</mentioned>.</desc>
