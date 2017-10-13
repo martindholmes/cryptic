@@ -84,7 +84,7 @@
             <desc>A clue whose constructor invokes words from other languages.</desc>
           </category>
           <category xml:id="ctpLiterary">
-            <gloss>Literary references (Xim type 7.6 Literary references etc.</gloss>
+            <gloss>Literary references (Xim type 7.6 Literary references etc.)</gloss>
             <desc>A clue whose constructor includes a quotation or refers to a literary
               text.</desc>
           </category>

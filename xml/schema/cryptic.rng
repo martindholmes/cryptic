@@ -5,7 +5,7 @@
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2017-10-12T22:49:33Z. .
+Schema generated from ODD source 2017-10-13T18:25:25Z. .
 TEI Edition: Version 3.2.0. Last updated on
 	10th July 2017, revision 0fcf651
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 3.2.0/
@@ -751,6 +751,8 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Macnutt 1966) Macnutt, D. S.. 1966. Ximenes on the art of the crossword. London, Methuen.</a:documentation>
                      <value>bibl:xwDt_2002</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Daily Telegraph Cryptics 9 2002) Daily Telegraph. 2002. The Daily Telegraph big book of cryptic crosswords. 9. London: Pan. Setters are not identified in this collection.</a:documentation>
+                     <value>bibl:xwGd_27183</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Guardian Crossword 27,183) Nutmeg. 2017. Guardian Cryptic Crossword No. 27,183. </a:documentation>
                      <value>bibl:xwGd_27192</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Guardian Crossword 27,192) Picaroon. 2017. Guardian Crossword No. 27,192.</a:documentation>
                      <value>bibl:xwGd_27288</value>
@@ -3542,7 +3544,7 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
                         <value>crs:ctpForeign</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Foreign languages (Xim type 7.5 Foreign languages)) A clue whose constructor invokes words from other languages.</a:documentation>
                         <value>crs:ctpLiterary</value>
-                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Literary references (Xim type 7.6 Literary references etc.) A clue whose constructor includes a quotation or refers to a literary text.</a:documentation>
+                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Literary references (Xim type 7.6 Literary references etc.)) A clue whose constructor includes a quotation or refers to a literary text.</a:documentation>
                         <value>crs:ctpOutsides</value>
                         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Outsides (Xim type 7.7 Outsides) A clue whose constructor requires the removal of the interior of a word or phrase. This is a special case of Initial or final.</a:documentation>
                         <value>crs:ctpEmbodiment</value>
